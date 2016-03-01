@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace Backlog
 {
@@ -24,5 +27,30 @@ namespace Backlog
         {
             InitializeComponent();
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            txtEmail.Visibility = Visibility.Visible;
+            tbEmail.Visibility = Visibility.Visible;
+            btnLogin.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+            Login login = new Login(txtUsername.Text, txtPassword.Text);
+            if(login.CheckCredentials())
+            {
+                MessageBox.Show("Successfull login");
+            }
+            else
+            {
+                MessageBox.Show("Login unsuccessfull");
+            }
+            
+        }
+
+        
+
     }
 }
