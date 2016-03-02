@@ -75,7 +75,7 @@ namespace Backlog
             {
                 tbMessage.Visibility = Visibility.Visible;
                 tbMessage.Text = "Logging in";
-                BacklogWindow window = new BacklogWindow();
+                BacklogWindow window = new BacklogWindow(txtUsername.Text);
                 window.Show();
             }
             else

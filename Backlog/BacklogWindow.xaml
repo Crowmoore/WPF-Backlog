@@ -6,33 +6,87 @@
         xmlns:local="clr-namespace:Backlog"
         mc:Ignorable="d"
         Title="Backlog" Height="400" Width="600">
-    <StackPanel Orientation="Vertical">
-        <TextBlock x:Name="tbTitle" Text="Backlog" HorizontalAlignment="Center" FontFamily="Impact" FontSize="21.333"></TextBlock>
-        <TabControl>
+    <StackPanel Orientation="Vertical" Background="Black">
+        <TextBlock x:Name="tbTitle" Text="User's Backlog" HorizontalAlignment="Center" FontFamily="Impact" FontSize="32" Foreground="White"/>
+        <TabControl Height="331">
+            <TabItem Header="My status">
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Not started" Height="20"></TextBlock>
+                            <TextBlock Text="In progress" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                            <TextBlock Text="Finished" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                            <TextBlock Text="Mastered" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                            <TextBlock Text="Abandoned" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                        </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <ProgressBar x:Name="pbNotStarted" Minimum="0" Maximum="100" Value="5" Width="200" Height="20" Margin="10, 0, 0, 0" Foreground="#FFE21111" Background="#FF570404">
+                            <ProgressBar.Effect>
+                                <DropShadowEffect/>
+                            </ProgressBar.Effect>
+                        </ProgressBar>
+                        <ProgressBar x:Name="pbInProgress" Minimum="0" Maximum="100" Value="55" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FFFDFD07" Background="#FF748004">
+                            <ProgressBar.Effect>
+                                <DropShadowEffect/>
+                            </ProgressBar.Effect>
+                        </ProgressBar>
+                        <ProgressBar x:Name="pbFinished" Minimum="0" Maximum="100" Value="20" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF014B01">
+                            <ProgressBar.Effect>
+                                <DropShadowEffect/>
+                            </ProgressBar.Effect>
+                        </ProgressBar>
+                        <ProgressBar x:Name="pbMastered" Minimum="0" Maximum="100" Value="3" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF855C03" Foreground="#FFFFB900">
+                            <ProgressBar.Effect>
+                                <DropShadowEffect/>
+                            </ProgressBar.Effect>
+                        </ProgressBar>
+                        <ProgressBar x:Name="pbAbandoned" Minimum="0" Maximum="100" Value="17" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FF475B4C" Background="Black">
+                            <ProgressBar.Effect>
+                                <DropShadowEffect/>
+                            </ProgressBar.Effect>
+                        </ProgressBar>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Show procentual info here" Margin="10, 0, 0, 0"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="My games">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="300">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Search" Margin="0, 0, 5, 0"></TextBlock>
                         <TextBlock Text="Sort by" Margin="0, 4, 5, 0"></TextBlock>
                     </StackPanel>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="120">
-                    <TextBox x:Name="tbSearch" Width="120" HorizontalAlignment="Right"></TextBox>
-                    <ComboBox Width="120" HorizontalAlignment="Right"></ComboBox>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="120">
+                         <TextBox x:Name="tbSearch" Width="120" HorizontalAlignment="Right"></TextBox>
+                         <ComboBox Width="120" HorizontalAlignment="Right">
+                            <ComboBoxItem x:Name="cbiTitle">Title</ComboBoxItem>
+                            <ComboBoxItem x:Name="cbiStatus">Status</ComboBoxItem>
+                            <ComboBoxItem x:Name="cbiDate">Date</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Add new">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Title"></TextBlock>
-                    <TextBox x:Name="txtTitle" Width="120" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Text="Release date"></TextBlock>
-                    <TextBox x:Name="txtDate" Width="120" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Text="No. of anchievements"></TextBlock>
-                    <TextBox x:Name="txtAchievements" Width="120" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock Text="Metascore"></TextBlock>
-                    <TextBox x:Name="txtScore" Width="120" HorizontalAlignment="Left"></TextBox>
-                    <Button x:Name="btnAdd" Content="Add" Width="120" HorizontalAlignment="Left" Margin="0, 10, 0, 0"></Button>
-                    
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Title"></TextBlock>
+                        <TextBox x:Name="txtTitle" Width="120" HorizontalAlignment="Left"></TextBox>
+                        <TextBlock Text="Release date"></TextBlock>
+                        <TextBox x:Name="txtDate" Width="120" HorizontalAlignment="Left"></TextBox>
+                        <TextBlock Text="No. of anchievements"></TextBlock>
+                        <TextBox x:Name="txtAchievements" Width="120" HorizontalAlignment="Left"></TextBox>
+                        <TextBlock Text="Metascore"></TextBlock>
+                        <TextBox x:Name="txtScore" Width="120" HorizontalAlignment="Left"></TextBox>
+                        <Button x:Name="btnAdd" Content="Add" Width="120" HorizontalAlignment="Left" Margin="0, 10, 0, 0"></Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10, 0, 0, 0">
+                        <TextBlock Text="Status"></TextBlock>
+                        <RadioButton>Not started</RadioButton>
+                        <RadioButton>In progress</RadioButton>
+                        <RadioButton>Finished</RadioButton>
+                        <RadioButton>Mastered</RadioButton>
+                        <RadioButton>Abandoned</RadioButton>
+                    </StackPanel>
                 </StackPanel>
             </TabItem>
         </TabControl>

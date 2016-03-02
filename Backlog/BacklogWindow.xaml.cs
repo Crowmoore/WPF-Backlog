@@ -19,9 +19,10 @@ namespace Backlog
     /// </summary>
     public partial class BacklogWindow : Window
     {
-        public BacklogWindow()
+        public BacklogWindow(string username)
         {
             InitializeComponent();
+            tbTitle.Text = username + "'s Backlog";
         }
     }
 }
