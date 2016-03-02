@@ -40,25 +40,14 @@ namespace Backlog
         }
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new Register(txtUsername.Text, txtPassword.Password, txtEmail.Text);
-            if(!register.CheckUsername())
+            string username = txtUsername.Text;
+            string password = txtPassword.Password;
+            string email = txtEmail.Text;
+            Validator validator = new Validator();
+            if(validator.Validate(username, password, email))
             {
-                tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Username max size is 10 and it cannot contain any special chars";
-            }
-            if(!register.CheckEmail())
-            {
-                tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Not a valid E-mail address";
-            }
-            if (!register.CheckPassword(txtPassword.Password))
-            {
-                tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Password must be between 1-20 characters long\n and it cannot contain special characters";
-            }
-            if (register.CheckUsername() && register.CheckEmail() && register.CheckPassword(txtPassword.Password))
-            {
-                if(register.RegisterUser())
+                Register register = new Register(username, password, email);
+                if (register.RegisterUser())
                 {
                     tbMessage.Visibility = Visibility.Visible;
                     tbMessage.Text = "Registered successfully. Please login";
@@ -70,11 +59,12 @@ namespace Backlog
                     btnRegister.Visibility = Visibility.Collapsed;
                     btnSignup.Visibility = Visibility.Visible;
                 }
-                
             }
+            
             else
             {
-                MessageBox.Show("Something went wrong");
+                tbMessage.Visibility = Visibility.Visible;
+                tbMessage.Text = "Something went wrong.\nUsername 1-10 characters, no special characters\nPassword 6-20 characters, no special characters\nE-mail needs to be valid";
             }
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -85,6 +75,8 @@ namespace Backlog
             {
                 tbMessage.Visibility = Visibility.Visible;
                 tbMessage.Text = "Logging in";
+                BacklogWindow window = new BacklogWindow();
+                window.Show();
             }
             else
             {

@@ -56,7 +56,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BacklogWindow.xaml.cs">
+      <DependentUpon>BacklogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Register.cs" />
+    <Compile Include="Validator.cs" />
+    <Page Include="BacklogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
