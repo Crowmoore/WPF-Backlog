@@ -9,15 +9,36 @@
     <StackPanel Orientation="Vertical" Background="Black">
         <TextBlock x:Name="tbTitle" Text="User's Backlog" HorizontalAlignment="Center" FontFamily="Impact" FontSize="32" Foreground="White"/>
         <TabControl Height="331">
+            <TabItem Header="My games">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="300" Width="576">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Search" Margin="0, 0, 5, 0"></TextBlock>
+                            <TextBlock Text="Sort by" Margin="0, 4, 5, 0"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="120">
+                            <TextBox x:Name="tbSearch" Width="120" HorizontalAlignment="Right"></TextBox>
+                            <ComboBox Width="120" HorizontalAlignment="Right">
+                                <ComboBoxItem x:Name="cbiTitle">Title</ComboBoxItem>
+                                <ComboBoxItem x:Name="cbiStatus">Status</ComboBoxItem>
+                                <ComboBoxItem x:Name="cbiDate">Date</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <DataGrid AutoGenerateColumns="True" Height="238" HorizontalAlignment="Left" 
+                              Margin="0,10,0,0" Name="dataGrid" VerticalAlignment="Top" Width="566">
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="My status">
                 <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                     <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Not started" Height="20"></TextBlock>
-                            <TextBlock Text="In progress" Margin="0, 10, 0, 0" Height="20"></TextBlock>
-                            <TextBlock Text="Finished" Margin="0, 10, 0, 0" Height="20"></TextBlock>
-                            <TextBlock Text="Mastered" Margin="0, 10, 0, 0" Height="20"></TextBlock>
-                            <TextBlock Text="Abandoned" Margin="0, 10, 0, 0" Height="20"></TextBlock>
-                        </StackPanel>
+                        <TextBlock Text="Not started" Height="20"></TextBlock>
+                        <TextBlock Text="In progress" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                        <TextBlock Text="Finished" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                        <TextBlock Text="Mastered" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                        <TextBlock Text="Abandoned" Margin="0, 10, 0, 0" Height="20"></TextBlock>
+                    </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <ProgressBar x:Name="pbNotStarted" Minimum="0" Maximum="100" Value="5" Width="200" Height="20" Margin="10, 0, 0, 0" Foreground="#FFE21111" Background="#FF570404">
                             <ProgressBar.Effect>
@@ -47,22 +68,6 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Show procentual info here" Margin="10, 0, 0, 0"></TextBlock>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="My games">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="300">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Search" Margin="0, 0, 5, 0"></TextBlock>
-                        <TextBlock Text="Sort by" Margin="0, 4, 5, 0"></TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="120">
-                         <TextBox x:Name="tbSearch" Width="120" HorizontalAlignment="Right"></TextBox>
-                         <ComboBox Width="120" HorizontalAlignment="Right">
-                            <ComboBoxItem x:Name="cbiTitle">Title</ComboBoxItem>
-                            <ComboBoxItem x:Name="cbiStatus">Status</ComboBoxItem>
-                            <ComboBoxItem x:Name="cbiDate">Date</ComboBoxItem>
-                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
             </TabItem>

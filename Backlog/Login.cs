@@ -39,15 +39,15 @@ namespace Backlog
             return builder.ToString();
         }
 
-        private int GetRowCount(MySqlCommand command)
+        private int CheckIfVerified(MySqlCommand command)
         {
-            int count = 0;
+            int verified = 0;
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                count++;
+                verified = int.Parse(reader.GetString("verified").Trim());
             }
-            return count;
+            return verified;
         }
 
         public bool CheckCredentials()
@@ -62,8 +62,8 @@ namespace Backlog
                 command.Parameters.AddWithValue("@UID", this.username);
                 command.Parameters.AddWithValue("@PASSWORD", this.password);
                 command.ExecuteNonQuery();
-                int rowCount = GetRowCount(command);
-                if (rowCount == 1)
+                int verified = CheckIfVerified(command);
+                if (verified == 1)
                 {
                     return true;
                 }
