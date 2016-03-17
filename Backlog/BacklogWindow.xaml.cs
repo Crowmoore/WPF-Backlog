@@ -22,6 +22,9 @@ namespace Backlog
     /// </summary>
     public partial class BacklogWindow : Window
     {
+        private DataTable table;
+        private DataView view;
+
         public BacklogWindow(string username)
         {
             InitializeComponent();
@@ -31,48 +34,10 @@ namespace Backlog
 
         private void ListUserGames(string username)
         {
-            string dbPass = GetDatabaseInfo();
-            MySqlConnection connection = new MySqlConnection("user=H3090;database=H3090;server=mysql.labranet.jamk.fi;password=" + dbPass + ";");
-            try
-            {
-                connection.Open();
-                string commandText = "SELECT name AS Title FROM game WHERE user_uid = '" + username + "'";
-                MySqlCommand command = new MySqlCommand(commandText, connection);
-                command.Prepare();
-                command.ExecuteNonQuery();
-                DataTable table = new DataTable("game");
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                adapter.Fill(table);
-                dataGrid.ItemsSource = table.DefaultView;
-                adapter.Update(table);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("connection: " + ex.Message);
-            }
-            finally
-            {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
-            }
-        }
-        private string GetDatabaseInfo()
-        {
-            string dbPassword = "";
-            try
-            {
-                using (StreamReader reader = new StreamReader("db.txt"))
-                {
-                    dbPassword = reader.ReadLine();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return dbPassword;
+            Database database = new Database();
+            table = database.GetAllUsersGamesFromDatabase(username);
+            view = table.DefaultView;
+            dataGrid.ItemsSource = view;
         }
     }
 }
