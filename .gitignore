@@ -243,7 +243,7 @@ _Pvt_Extensions
 .fake/
 
 Backlog/App.config
-Backlog/Properties/Settings.settings
+Backlog/Properties/
 db.txt
 
 # JetBrains Rider
