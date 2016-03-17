@@ -19,11 +19,12 @@ namespace Backlog
         private string email;
         private string password;
         private string hash;
+        private MD5forPHP converter = new MD5forPHP();
 
         public Register(string username, string password, string email)
         {
             this.username = username;
-            this.password = MD5ForPHP(password);
+            this.password = this.converter.ConvertToPHP(password);
             this.email = email;
             this.hash = GenerateVerificationHash();
             this.connectionString = Properties.Settings.Default.Database;
@@ -31,24 +32,8 @@ namespace Backlog
         private string GenerateVerificationHash()
         {
             Random rand = new Random();
-            string hash = MD5ForPHP(rand.Next(0, 1000).ToString());
+            string hash = this.converter.ConvertToPHP(rand.Next(0, 1000).ToString());
             return hash;
-        }
-
-        private string MD5ForPHP(string textToHash)
-        {
-            UTF8Encoding encode = new UTF8Encoding();
-            byte[] bytes = encode.GetBytes(textToHash);
-
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] hashed = md5.ComputeHash(bytes);
-            string result = "";
-
-            for (int i = 0; i < hashed.Length; i++)
-            {
-                result += Convert.ToString(hashed[i], 16).PadLeft(2, '0');
-            }
-            return result.PadLeft(32, '0');
         }
 
         public bool RegisterUser()
