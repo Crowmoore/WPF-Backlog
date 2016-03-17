@@ -58,5 +58,33 @@ namespace Backlog
                 }
             }
         }
+
+        public DataTable GetAllGenresFromDatabase()
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string query = "SELECT name FROM genre";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Prepare();
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataSet set = new DataSet();
+                adapter.Fill(set, "genre");
+                return set.Tables["genre"];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }

@@ -30,13 +30,7 @@ namespace Backlog
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)
         {
-            txtEmail.Visibility = Visibility.Visible;
-            txtPassword.Password = "";
-            txtUsername.Text = "";
-            tbEmail.Visibility = Visibility.Visible;
-            btnLogin.Visibility = Visibility.Collapsed;
-            btnRegister.Visibility = Visibility.Visible;
-            btnSignup.Visibility = Visibility.Collapsed;
+            ShowRegisterScreen();
         }
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
@@ -49,22 +43,14 @@ namespace Backlog
                 Register register = new Register(username, password, email);
                 if (register.RegisterUser())
                 {
-                    tbMessage.Visibility = Visibility.Visible;
-                    tbMessage.Text = "Registered successfully. Please login";
-                    txtEmail.Visibility = Visibility.Collapsed;
-                    txtPassword.Password = "";
-                    txtUsername.Text = "";
-                    tbEmail.Visibility = Visibility.Collapsed;
-                    btnLogin.Visibility = Visibility.Visible;
-                    btnRegister.Visibility = Visibility.Collapsed;
-                    btnSignup.Visibility = Visibility.Visible;
+                    ShowLoginScreen();
                 }
             }
             
             else
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Something went wrong.\nUsername 1-10 characters, no special characters\nPassword 6-20 characters, no special characters\nE-mail needs to be valid";
+                tbMessage.Text = "Username 1-10 characters, no special characters\nPassword 6-20 characters, no special characters\nE-mail needs to be valid";
             }
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -81,12 +67,34 @@ namespace Backlog
             else
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = login.MD5ForPHP("m0l0kk1");
-                //tbMessage.Text = "Wrong username or password";
+                tbMessage.Text = "Wrong username or password";
             }
             
         }
-
+        private void ShowRegisterScreen()
+        {
+            txtEmail.Visibility = Visibility.Visible;
+            txtPassword.Password = "";
+            txtUsername.Text = "";
+            txtUsername.Focus();
+            tbEmail.Visibility = Visibility.Visible;
+            btnLogin.Visibility = Visibility.Collapsed;
+            btnRegister.Visibility = Visibility.Visible;
+            btnSignup.Visibility = Visibility.Collapsed;
+        }
+        private void ShowLoginScreen()
+        {
+            tbMessage.Visibility = Visibility.Visible;
+            tbMessage.Text = "Registered successfully. Please login";
+            txtEmail.Visibility = Visibility.Collapsed;
+            txtPassword.Password = "";
+            txtUsername.Text = "";
+            txtUsername.Focus();
+            tbEmail.Visibility = Visibility.Collapsed;
+            btnLogin.Visibility = Visibility.Visible;
+            btnRegister.Visibility = Visibility.Collapsed;
+            btnSignup.Visibility = Visibility.Visible;
+        }
         
 
     }

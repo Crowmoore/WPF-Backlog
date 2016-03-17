@@ -37,16 +37,18 @@ namespace Backlog
 
         private string MD5ForPHP(string textToHash)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] unhashed = Encoding.UTF8.GetBytes((textToHash).ToLower());
-            byte[] hashed = md5.ComputeHash(unhashed);
-            StringBuilder builder = new StringBuilder();
+            UTF8Encoding encode = new UTF8Encoding();
+            byte[] bytes = encode.GetBytes(textToHash);
 
-            foreach (var b in hashed)
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] hashed = md5.ComputeHash(bytes);
+            string result = "";
+
+            for (int i = 0; i < hashed.Length; i++)
             {
-                builder.Append(b.ToString("x").ToLower());
+                result += Convert.ToString(hashed[i], 16).PadLeft(2, '0');
             }
-            return builder.ToString();
+            return result.PadLeft(32, '0');
         }
 
         public bool RegisterUser()

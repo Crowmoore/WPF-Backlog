@@ -24,20 +24,31 @@ namespace Backlog
     {
         private DataTable table;
         private DataView view;
+        private Database database = new Database();
 
-        public BacklogWindow(string username)
+        public BacklogWindow(string user)
         {
             InitializeComponent();
-            ListUserGames(username);
-            tbTitle.Text = username + "'s Backlog";
+            ListUserGames(user);
+            tbTitle.Text = user + "'s Backlog";
         }
 
-        private void ListUserGames(string username)
+        private void ListUserGames(string user)
         {
-            Database database = new Database();
-            table = database.GetAllUsersGamesFromDatabase(username);
+            table = database.GetTestData();
             view = table.DefaultView;
             dataGrid.ItemsSource = view;
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string search = txtSearch.Text;
+            view.RowFilter = string.Format("Title LIKE '%{0}%'", search);
+        }
+
+        private void btnShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            view.RowFilter = string.Empty;
         }
     }
 }
