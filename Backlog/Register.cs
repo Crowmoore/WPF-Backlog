@@ -14,7 +14,6 @@ namespace Backlog
 {
     class Register
     {
-        private string dbPass;
         private string connectionString;
         private string username;
         private string email;
@@ -26,9 +25,8 @@ namespace Backlog
             this.username = username;
             this.password = MD5ForPHP(password);
             this.email = email;
-            this.dbPass = GetDatabaseInfo();
             this.hash = GenerateVerificationHash();
-            this.connectionString = "user=H3090;database=H3090_1;server=mysql.labranet.jamk.fi;password=" + this.dbPass + ";";
+            this.connectionString = Properties.Settings.Default.Database;
         }
         private string GenerateVerificationHash()
         {
@@ -67,6 +65,8 @@ namespace Backlog
                 int rowCount = command.ExecuteNonQuery();
                 if (rowCount == 1)
                 {
+                    Verification verificate = new Verification();
+                    verificate.SendVerification(this.username, this.email, this.hash);
                     return true;
                 }
                 return false;
@@ -83,23 +83,6 @@ namespace Backlog
                     connection.Close();
                 }
             }
-        }
-
-        private string GetDatabaseInfo()
-        {
-            string dbPassword = "";
-            try
-            {
-                using (StreamReader reader = new StreamReader("db.txt"))
-                {
-                    dbPassword = reader.ReadLine();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return dbPassword;
         }
 
         public bool CheckPassword(string password)

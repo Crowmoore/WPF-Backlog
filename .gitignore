@@ -242,6 +242,8 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+Backlog/App.config
+App.config
 db.txt
 
 # JetBrains Rider

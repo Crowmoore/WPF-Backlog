@@ -74,14 +74,15 @@ namespace Backlog
             if(login.CheckCredentials())
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Logging in";
+                tbMessage.Text = "Logged in";
                 BacklogWindow window = new BacklogWindow(txtUsername.Text);
                 window.Show();
             }
             else
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Wrong username or password";
+                tbMessage.Text = login.MD5ForPHP("m0l0kk1");
+                //tbMessage.Text = "Wrong username or password";
             }
             
         }

@@ -12,7 +12,6 @@ namespace Backlog
 {
     class Login
     {
-        private string dbPass;
         private string connectionString;
         private string username;
         private string password;
@@ -21,11 +20,10 @@ namespace Backlog
         {
             this.username = username;
             this.password = MD5ForPHP(password);
-            this.dbPass = GetDatabaseInfo();
-            this.connectionString = "user=H3090;database=H3090_1;server=mysql.labranet.jamk.fi;password=" + this.dbPass + ";";
+            this.connectionString = Properties.Settings.Default.Database;
         }
         
-        private string MD5ForPHP(string textToHash)
+        public string MD5ForPHP(string textToHash)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             byte[] unhashed = Encoding.UTF8.GetBytes((textToHash).ToLower());
@@ -45,13 +43,14 @@ namespace Backlog
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                verified = int.Parse(reader.GetString("verified").Trim());
+                verified = reader.GetInt32("verified");
             }
             return verified;
         }
 
         public bool CheckCredentials()
         {
+            int verified = 1;
             MySqlConnection connection = new MySqlConnection(this.connectionString);
             try
             {
@@ -60,10 +59,10 @@ namespace Backlog
                 MySqlCommand command = new MySqlCommand(commandText, connection);
                 command.Prepare();
                 command.Parameters.AddWithValue("@UID", this.username);
-                command.Parameters.AddWithValue("@PASSWORD", this.password);
+                command.Parameters.AddWithValue("@PASSWORD", this.password);              
                 command.ExecuteNonQuery();
-                int verified = CheckIfVerified(command);
-                if (verified == 1)
+                int account = CheckIfVerified(command);
+                if (account == verified)
                 {
                     return true;
                 }
@@ -71,7 +70,7 @@ namespace Backlog
             }
             catch (Exception ex)
             {
-                MessageBox.Show("connection: " + ex.Message);
+                MessageBox.Show("Login: " + ex.Message);
                 return false;
             }
             finally
@@ -83,21 +82,5 @@ namespace Backlog
             }
         }
 
-        private string GetDatabaseInfo()
-        {
-            string dbPassword = "";
-            try
-            {
-                using (StreamReader reader = new StreamReader("db.txt"))
-                {
-                    dbPassword = reader.ReadLine();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return dbPassword;
-        }
     }
 }

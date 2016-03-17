@@ -32,11 +32,11 @@ namespace Backlog
         private void ListUserGames(string username)
         {
             string dbPass = GetDatabaseInfo();
-            MySqlConnection connection = new MySqlConnection("user=H3090;database=H3090_1;server=mysql.labranet.jamk.fi;password=" + dbPass + ";");
+            MySqlConnection connection = new MySqlConnection("user=H3090;database=H3090;server=mysql.labranet.jamk.fi;password=" + dbPass + ";");
             try
             {
                 connection.Open();
-                string commandText = "SELECT name AS Title, progress_idprogress AS Status FROM game WHERE user = '" + username + "'";
+                string commandText = "SELECT name AS Title FROM game WHERE user_uid = '" + username + "'";
                 MySqlCommand command = new MySqlCommand(commandText, connection);
                 command.Prepare();
                 command.ExecuteNonQuery();

@@ -76,12 +76,10 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Title"></TextBlock>
                         <TextBox x:Name="txtTitle" Width="120" HorizontalAlignment="Left"></TextBox>
-                        <TextBlock Text="Release date"></TextBlock>
-                        <TextBox x:Name="txtDate" Width="120" HorizontalAlignment="Left"></TextBox>
-                        <TextBlock Text="No. of anchievements"></TextBlock>
+                        <TextBlock Text="Achievements"></TextBlock>
                         <TextBox x:Name="txtAchievements" Width="120" HorizontalAlignment="Left"></TextBox>
-                        <TextBlock Text="Metascore"></TextBlock>
-                        <TextBox x:Name="txtScore" Width="120" HorizontalAlignment="Left"></TextBox>
+                        <TextBlock Text="Genre"></TextBlock>
+                        <TextBox x:Name="txtGenre" Width="120" HorizontalAlignment="Left"></TextBox>
                         <Button x:Name="btnAdd" Content="Add" Width="120" HorizontalAlignment="Left" Margin="0, 10, 0, 0"></Button>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10, 0, 0, 0">
