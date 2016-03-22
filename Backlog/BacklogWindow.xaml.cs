@@ -42,13 +42,46 @@ namespace Backlog
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+          
             string search = txtSearch.Text;
-            view.RowFilter = string.Format("Title LIKE '%{0}%'", search);
+            string category = cbCategory.SelectedValue.ToString();
+            
+            string filter = string.Format("Title LIKE '%{0}%'", search);
+            view.RowFilter = filter;
         }
 
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
         {
             view.RowFilter = string.Empty;
+        }
+
+        private void ShowProgress()
+        {
+            int finished = table.AsEnumerable().Where(x => x["Status"].ToString() == "Finished").ToList().Count;
+            int inProgress = table.AsEnumerable().Where(x => x["Status"].ToString() == "In progress").ToList().Count;
+            int notStarted = table.AsEnumerable().Where(x => x["Status"].ToString() == "Not started").ToList().Count;
+            int mastered = table.AsEnumerable().Where(x => x["Status"].ToString() == "Mastered").ToList().Count;
+            int abandoned = table.AsEnumerable().Where(x => x["Status"].ToString() == "Abandoned").ToList().Count;
+            int total = table.Rows.Count;
+            pbFinished.Value = GetPercentage(finished, total);
+            pbInProgress.Value = GetPercentage(inProgress, total);
+            pbNotStarted.Value = GetPercentage(notStarted, total);
+            pbMastered.Value = GetPercentage(mastered, total);
+            pbAbandoned.Value = GetPercentage(abandoned, total);
+
+        }
+
+        private double GetPercentage(int count, int total)
+        {
+            return Math.Round((((double)count / (double)total) * 100), 2);
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(tabStatus != null && tabStatus.IsSelected)
+            {
+                ShowProgress();
+            }
         }
     }
 }

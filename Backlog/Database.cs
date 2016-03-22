@@ -22,7 +22,10 @@ namespace Backlog
 
             table.Rows.Add("Jazzpunk", "10/24", "Finished", "");
             table.Rows.Add("Cities: Skylines", "15/30", "In progress", "");
+            table.Rows.Add("Testgame", "15/30", "Finished", "Remove later");
             table.Rows.Add("Darkest Dungeon", "20/40", "Abandoned", "Too hard");
+            table.Rows.Add("Testgame2", "0/30", "Not started", "");
+            table.Rows.Add("Testgame3", "30/30", "Mastered", "");
 
             return table;
         }
