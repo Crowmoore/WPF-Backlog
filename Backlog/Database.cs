@@ -36,9 +36,10 @@ namespace Backlog
             try
             {     
                 connection.Open();
-                string query = "SELECT game.name, progress.name AS status, achievements, comment " +
+                string query = "SELECT game.name, progress.name AS status, genre.name AS genre, achievements, comment " +
                                "FROM game " +
                                "INNER JOIN progress ON game.progress_idprogress = progress.idprogress " +
+                               "INNER JOIN genre ON game.genre_idgenre = genre.idgenre " +
                                "WHERE user_uid = @UID";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Prepare();
@@ -47,6 +48,65 @@ namespace Backlog
                 DataSet set = new DataSet();
                 adapter.Fill(set, "game");
                 return set.Tables["game"];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public void AddNewGame(string user, string title, string achievements, string progress, string comment, string genre)
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string query = "INSERT INTO game (name, achievements, progress_idprogress, comment, user_uid, genre_idgenre) " +
+                                "VALUES (@TITLE, @ACHIEVEMENTS, (SELECT idprogress FROM progress WHERE name = @PROGRESS), " +
+                                "@COMMENT, (SELECT uid FROM user WHERE uid = @USER), (SELECT idgenre FROM genre WHERE name = @GENRE))";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@TITLE", title);
+                command.Parameters.AddWithValue("@ACHIEVEMENTS", achievements);
+                command.Parameters.AddWithValue("@PROGRESS", progress);
+                command.Parameters.AddWithValue("@COMMENT", comment);
+                command.Parameters.AddWithValue("@USER", user);
+                command.Parameters.AddWithValue("@GENRE", genre);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public void AddGenre(string genre)
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string query = "REPLACE INTO genre (name) VALUES (@genre)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@GENRE", genre);
+                command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

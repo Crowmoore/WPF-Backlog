@@ -25,17 +25,19 @@ namespace Backlog
         private DataTable table;
         private DataView view;
         private Database database = new Database();
+        private string user;
 
         public BacklogWindow(string user)
         {
             InitializeComponent();
+            this.user = user;
             ListUserGames(user);
             tbTitle.Text = user + "'s Backlog";
         }
 
         private void ListUserGames(string user)
         {
-            table = database.GetTestData();
+            table = database.GetAllUsersGamesFromDatabase(user);
             view = table.DefaultView;
             dataGrid.ItemsSource = view;
         }
@@ -46,7 +48,7 @@ namespace Backlog
             string search = txtSearch.Text;
             string category = cbCategory.SelectedValue.ToString();
             
-            string filter = string.Format("Title LIKE '%{0}%'", search);
+            string filter = string.Format("name LIKE '%{0}%'", search);
             view.RowFilter = filter;
         }
 
@@ -73,7 +75,7 @@ namespace Backlog
 
         private double GetPercentage(int count, int total)
         {
-            return Math.Round((((double)count / (double)total) * 100), 2);
+            return Math.Round(((double)count / (double)total) * 100, 2);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -82,6 +84,32 @@ namespace Backlog
             {
                 ShowProgress();
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            string title = txtTitle.Text;
+            string achievements = txtAchievementsGained.Text + "/" + txtAchievementsTotal.Text;
+            var selected = spProgress.Children.OfType<RadioButton>()
+                         .FirstOrDefault(button => button.IsChecked.HasValue && button.IsChecked.Value);
+            string progress = selected.ToolTip.ToString();
+            string user = this.user;
+            string genre = txtGenre.Text;
+            string comment = txtComment.Text;
+
+            database.AddGenre(genre);
+            database.AddNewGame(user, title, achievements, progress, comment, genre);
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            txtTitle.Text = "";
+            txtAchievementsGained.Text = "";
+            txtAchievementsTotal.Text = "";
+            txtGenre.Text = "";
+            txtComment.Text = "";
+            rbNotStarted.IsChecked = true;
         }
     }
 }
