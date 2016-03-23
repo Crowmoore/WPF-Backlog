@@ -91,6 +91,7 @@ namespace Backlog
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //change to switch case
             if(tabStatus != null && tabStatus.IsSelected)
             {
                 ShowProgress();
@@ -113,6 +114,12 @@ namespace Backlog
             ClearForm();
         }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            //call automatically on tab change
+            ListUserGames(user);
+        }
+
         private void ClearForm()
         {
             txtTitle.Text = "";
@@ -125,12 +132,22 @@ namespace Backlog
 
         private void cbGenres_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string genre = cbGenres.SelectedItem as string;
+            var comboBox = sender as ComboBox;
+            string genre = comboBox.SelectedItem as string;
             if(genre != null)
             {
                 string filter = string.Format("genre = '{0}'", genre);
                 view.RowFilter = filter;
             }
+        }
+
+        private void rb_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+            string status = button.ToolTip.ToString();
+
+            string filter = string.Format("status = '{0}'", status);
+            view.RowFilter = filter;
         }
     }
 }
