@@ -91,10 +91,21 @@ namespace Backlog
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //change to switch case
-            if(tabStatus != null && tabStatus.IsSelected)
+            TabControl tabControl = sender as TabControl;
+            TabItem tab = tabControl.SelectedItem as TabItem;
+            if(tab != null)
             {
-                ShowProgress();
+                switch (tab.Header.ToString())
+                {
+                    case "My status":
+                        ShowProgress();
+                        break;
+                    case "My games":
+                        ListUserGames(user);
+                        break;
+                    default: 
+                        break;
+                }
             }
         }
 
@@ -112,12 +123,6 @@ namespace Backlog
             database.AddGenre(genre);
             database.AddNewGame(user, title, achievements, progress, comment, genre);
             ClearForm();
-        }
-
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            //call automatically on tab change
-            ListUserGames(user);
         }
 
         private void ClearForm()

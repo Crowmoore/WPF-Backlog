@@ -33,7 +33,6 @@
                         <StackPanel Orientation="Vertical">
                             <Button x:Name="btnSearch" Width="60" Content="Search" Click="btnSearch_Click"></Button>
                             <Button x:Name="btnShowAll" Content="Show All" Click="btnShowAll_Click"/>
-                            <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click"/>
                         </StackPanel>
                     </StackPanel>
                     <DataGrid AutoGenerateColumns="False" Height="370" HorizontalAlignment="Left" 
