@@ -14,15 +14,12 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300" Width="790">
                     <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Search" Margin="0, 0, 5, 0"></TextBlock>
-                            <TextBlock Text="Search by" Margin="0, 4, 5, 0"></TextBlock>
+                            <TextBlock Text="Title" Margin="0, 0, 5, 0"></TextBlock>
+                            <TextBlock Text="Genre" Margin="0, 4, 5, 0"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
                             <TextBox x:Name="txtSearch" Width="120" HorizontalAlignment="Right"></TextBox>
-                            <ComboBox Width="120" HorizontalAlignment="Left" x:Name="cbCategory" SelectedIndex="0">
-                                <ComboBoxItem x:Name="cbiTitle">Title</ComboBoxItem>
-                                <ComboBoxItem x:Name="cbiStatus">Status</ComboBoxItem>
-                                <ComboBoxItem x:Name="cbiGenre">Genre</ComboBoxItem>
+                            <ComboBox Width="120" HorizontalAlignment="Left" x:Name="cbGenres" SelectionChanged="cbGenres_SelectionChanged">
                             </ComboBox>
                             <StackPanel Orientation="Horizontal" Margin="3, 10, 0, 0">
                                 <RadioButton Background="Red" ToolTip="Not started"></RadioButton>
@@ -38,13 +35,13 @@
                         </StackPanel>
                     </StackPanel>
                     <DataGrid AutoGenerateColumns="False" Height="420" HorizontalAlignment="Left" 
-                              Margin="0,10,0,0" Name="dataGrid" VerticalAlignment="Top" Width="790" FontSize="16">
+                              Margin="0,10,0,0" Name="dataGrid" VerticalAlignment="Top" Width="790" FontSize="18.667" FontFamily="Impact">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Title" Binding="{Binding name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Achievements" Binding="{Binding achievements}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Status" Binding="{Binding status}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Genre" Binding="{Binding genre}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Comments" Binding="{Binding comment}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Comments" Width="*" Binding="{Binding comment}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

@@ -32,6 +32,7 @@ namespace Backlog
             InitializeComponent();
             this.user = user;
             ListUserGames(user);
+            PopulateComboBox();
             tbTitle.Text = user + "'s Backlog";
         }
 
@@ -42,11 +43,21 @@ namespace Backlog
             dataGrid.ItemsSource = view;
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        private void PopulateComboBox()
         {
-          
+            DataTable genres = database.GetAllGenresFromDatabase();
+            List<string> names = new List<string>();
+            foreach (DataRow row in genres.Rows)
+            {
+                string name = row[0].ToString();
+                names.Add(name);
+            }
+            cbGenres.ItemsSource = names;
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {   
             string search = txtSearch.Text;
-            string category = cbCategory.SelectedValue.ToString();
             
             string filter = string.Format("name LIKE '%{0}%'", search);
             view.RowFilter = filter;
@@ -110,6 +121,16 @@ namespace Backlog
             txtGenre.Text = "";
             txtComment.Text = "";
             rbNotStarted.IsChecked = true;
+        }
+
+        private void cbGenres_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string genre = cbGenres.SelectedItem as string;
+            if(genre != null)
+            {
+                string filter = string.Format("genre = '{0}'", genre);
+                view.RowFilter = filter;
+            }
         }
     }
 }
