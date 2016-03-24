@@ -36,7 +36,7 @@ namespace Backlog
             try
             {     
                 connection.Open();
-                string query = "SELECT game.name, progress.name AS status, genre.name AS genre, achievements, comment " +
+                string query = "SELECT idgame, game.name, progress.name AS status, genre.name AS genre, achievements, comment " +
                                "FROM game " +
                                "INNER JOIN progress ON game.progress_idprogress = progress.idprogress " +
                                "INNER JOIN genre ON game.genre_idgenre = genre.idgenre " +
