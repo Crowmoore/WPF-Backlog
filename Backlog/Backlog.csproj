@@ -61,6 +61,7 @@
     <Compile Include="BacklogWindow.xaml.cs">
       <DependentUpon>BacklogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BLController.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="MD5forPHP.cs" />
     <Compile Include="Register.cs" />

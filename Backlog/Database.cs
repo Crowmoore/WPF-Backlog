@@ -11,7 +11,7 @@ namespace Backlog
 {
     class Database
     {
-        public DataTable GetTestData()
+        public static DataTable GetTestData()
         {
             DataTable table = new DataTable();
 
@@ -30,7 +30,7 @@ namespace Backlog
             return table;
         }
 
-        public DataTable GetAllUsersGamesFromDatabase(string user)
+        public static DataTable GetAllUsersGamesFromDatabase(string user)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -38,8 +38,8 @@ namespace Backlog
                 connection.Open();
                 string query = "SELECT idgame, game.name, progress.name AS status, genre.name AS genre, achievements, comment " +
                                "FROM game " +
-                               "INNER JOIN progress ON game.progress_idprogress = progress.idprogress " +
-                               "INNER JOIN genre ON game.genre_idgenre = genre.idgenre " +
+                               "LEFT JOIN progress ON game.progress_idprogress = progress.idprogress " +
+                               "LEFT JOIN genre ON game.genre_idgenre = genre.idgenre " +
                                "WHERE user_uid = @UID";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Prepare();
@@ -49,9 +49,8 @@ namespace Backlog
                 adapter.Fill(set, "game");
                 return set.Tables["game"];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
                 throw;
             }
             finally
@@ -63,7 +62,7 @@ namespace Backlog
             }
         }
 
-        public void AddNewGame(string user, string title, string achievements, string progress, string comment, string genre)
+        public static void AddNewGame(string user, string title, string achievements, string progress, string comment, string genre)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -82,9 +81,8 @@ namespace Backlog
                 command.Parameters.AddWithValue("@GENRE", genre);
                 command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
                 throw;
             }
             finally
@@ -96,7 +94,7 @@ namespace Backlog
             }
         }
 
-        public void AddGenre(string genre)
+        public static void AddGenre(string genre)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -108,9 +106,8 @@ namespace Backlog
                 command.Parameters.AddWithValue("@GENRE", genre);
                 command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
                 throw;
             }
             finally
@@ -122,7 +119,7 @@ namespace Backlog
             }
         }
 
-        public DataTable GetAllGenresFromDatabase()
+        public static DataTable GetAllGenresFromDatabase()
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -136,9 +133,34 @@ namespace Backlog
                 adapter.Fill(set, "genre");
                 return set.Tables["genre"];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static int DeleteGameFromDatabase(int id)
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string query = "DELETE FROM game WHERE idgame = @ID";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@ID", id);
+                int affected = command.ExecuteNonQuery();
+                return affected;
+            }
+            catch (Exception)
+            {
                 throw;
             }
             finally

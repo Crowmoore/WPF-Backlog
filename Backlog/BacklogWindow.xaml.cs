@@ -24,43 +24,33 @@ namespace Backlog
     {
         private DataTable table;
         private DataView view;
-        private Database database = new Database();
         private string user;
 
         public BacklogWindow(string user)
         {
             InitializeComponent();
             this.user = user;
-            ListUserGames(user);
-            PopulateComboBox();
+            ListUsersGames(user);
+            PopulateComboBoxWithGenres();
             tbTitle.Text = user + "'s Backlog";
         }
 
-        private void ListUserGames(string user)
+        private void ListUsersGames(string user)
         {
-            table = database.GetAllUsersGamesFromDatabase(user);
+            table = BLController.GetAllUsersGames(user);
             view = table.DefaultView;
             dataGrid.ItemsSource = view;
         }
 
-        private void PopulateComboBox()
+        private void PopulateComboBoxWithGenres()
         {
-            DataTable genres = database.GetAllGenresFromDatabase();
-            List<string> names = new List<string>();
-            foreach (DataRow row in genres.Rows)
-            {
-                string name = row[0].ToString();
-                names.Add(name);
-            }
-            cbGenres.ItemsSource = names;
+            cbGenres.ItemsSource = BLController.GetAllGenres();
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {   
-            string search = txtSearch.Text;
-            
-            string filter = string.Format("name LIKE '%{0}%'", search);
-            view.RowFilter = filter;
+            view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
+            sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
         }
 
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
@@ -68,42 +58,39 @@ namespace Backlog
             view.RowFilter = string.Empty;
         }
 
-        private void ShowProgress()
+        private void UpdateProgress()
         {
-            int finished = table.AsEnumerable().Where(x => x["Status"].ToString() == "Finished").ToList().Count;
-            int inProgress = table.AsEnumerable().Where(x => x["Status"].ToString() == "In progress").ToList().Count;
-            int notStarted = table.AsEnumerable().Where(x => x["Status"].ToString() == "Not started").ToList().Count;
-            int mastered = table.AsEnumerable().Where(x => x["Status"].ToString() == "Mastered").ToList().Count;
-            int abandoned = table.AsEnumerable().Where(x => x["Status"].ToString() == "Abandoned").ToList().Count;
+            int finished = BLController.GetProgress(table, "Finished");
+            int inProgress = BLController.GetProgress(table, "In progress");
+            int notStarted = BLController.GetProgress(table, "Not started");
+            int mastered = BLController.GetProgress(table, "Mastered");
+            int abandoned = BLController.GetProgress(table, "Abandoned");
             int total = table.Rows.Count;
-            pbFinished.Value = GetPercentage(finished, total);
-            pbInProgress.Value = GetPercentage(inProgress, total);
-            pbNotStarted.Value = GetPercentage(notStarted, total);
-            pbMastered.Value = GetPercentage(mastered, total);
-            pbAbandoned.Value = GetPercentage(abandoned, total);
 
-        }
-
-        private double GetPercentage(int count, int total)
-        {
-            return Math.Round(((double)count / (double)total) * 100, 2);
+            pbFinished.Value = BLController.GetPercentage(finished, total);
+            pbInProgress.Value = BLController.GetPercentage(inProgress, total);
+            pbNotStarted.Value = BLController.GetPercentage(notStarted, total);
+            pbMastered.Value = BLController.GetPercentage(mastered, total);
+            pbAbandoned.Value = BLController.GetPercentage(abandoned, total);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabControl tabControl = sender as TabControl;
-            TabItem tab = tabControl.SelectedItem as TabItem;
-            if (tab != null)
+            if(e.Source is TabControl)
             {
-                switch (tab.Header.ToString())
+                TabControl tabControl = sender as TabControl;
+                TabItem currentTab = tabControl.SelectedItem as TabItem;
+                string current = currentTab.Header as string;
+                sbStatus.Text = "";
+                switch (current)
                 {
                     case "My status":
-                        ShowProgress();
+                        UpdateProgress();
                         break;
                     case "My games":
-                        ListUserGames(user);
+                        ListUsersGames(user);
                         break;
-                    default: 
+                    default:
                         break;
                 }
             }
@@ -113,15 +100,23 @@ namespace Backlog
         {
             string title = txtTitle.Text;
             string achievements = txtAchievementsGained.Text + "/" + txtAchievementsTotal.Text;
-            var selected = spProgress.Children.OfType<RadioButton>()
+            RadioButton selected = spProgress.Children.OfType<RadioButton>()
                          .FirstOrDefault(button => button.IsChecked.HasValue && button.IsChecked.Value);
-            string progress = selected.ToolTip.ToString();
+            string progress = selected.ToolTip as string;
             string user = this.user;
             string genre = txtGenre.Text;
             string comment = txtComment.Text;
 
-            database.AddGenre(genre);
-            database.AddNewGame(user, title, achievements, progress, comment, genre);
+            try
+            {
+                BLController.AddNewGenre(genre);
+                BLController.AddNewGame(user, title, achievements, progress, comment, genre);
+                sbStatus.Text = "Game added to database";
+            }
+            catch(Exception ex)
+            {
+                sbStatus.Text = ex.Message;
+            }
             ClearForm();
         }
 
@@ -131,7 +126,7 @@ namespace Backlog
             txtAchievementsGained.Text = "";
             txtAchievementsTotal.Text = "";
             txtGenre.Text = "";
-            txtComment.Text = "";
+            txtComment.Text = ""; 
             rbNotStarted.IsChecked = true;
         }
 
@@ -140,8 +135,8 @@ namespace Backlog
             string genre = cbGenres.SelectedItem as string;
             if(genre != null)
             {
-                string filter = string.Format("genre = '{0}'", genre);
-                view.RowFilter = filter;
+                view.RowFilter = BLController.GetGenreFilter(genre);
+                sbStatus.Text = string.Format("Results filtered by genre: '{0}'", genre);
             }
         }
 
@@ -150,8 +145,38 @@ namespace Backlog
             var button = sender as RadioButton;
             string status = button.ToolTip as string;
 
-            string filter = string.Format("status = '{0}'", status);
-            view.RowFilter = filter;
+            view.RowFilter = BLController.GetStatusFilter(status);
+            sbStatus.Text = string.Format("Results filtered by status: '{0}'", status);
+        }
+
+        private void Row_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            //Make some kind of editing magic happen here
+
+            /*DataRowView row = dataGrid.SelectedItem as DataRowView;
+            txtTitle.Text = row.Row[1] as string;
+            txtGenre.Text = row.Row[3] as string;
+            tcMain.SelectedIndex = 2;*/
+        }
+        private void cm_Delete(object sender, RoutedEventArgs e)
+        {
+            DataRowView rowView = dataGrid.SelectedItem as DataRowView;
+            string title = rowView.Row[1] as string;
+            int id = (int)rowView.Row[0];
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + title + " from the database?", "Delete confirmation", MessageBoxButton.YesNo);
+            switch(result.ToString())
+            {
+                case "Yes":
+                    BLController.DeleteGame(id);
+                    ListUsersGames(user);
+                    break;
+                case "No":
+                    break;
+                default:
+                    break;
+            }
+
+
         }
     }
 }

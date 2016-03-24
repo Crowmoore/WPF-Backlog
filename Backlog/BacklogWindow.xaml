@@ -7,182 +7,199 @@
         mc:Ignorable="d"
         Title="Backlog" Height="600" Width="800"
         ResizeMode="NoResize">
-    <StackPanel Orientation="Vertical" Background="Black">
-        <TextBlock x:Name="tbTitle" Text="User's Backlog" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontFamily="Impact" FontSize="32" Foreground="White"/>
-        <TabControl Height="533" x:Name="tcMain" Margin="0, 20, 0, 0"  SelectionChanged="TabControl_SelectionChanged">
-            <TabItem Header="My games" x:Name="tabGames">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300" Width="790">
-                    <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Title" Margin="0, 0, 5, 0"></TextBlock>
-                            <TextBlock Text="Genre" Margin="0, 4, 5, 0"></TextBlock>
-                            <TextBlock Text="Status" Margin="0, 12, 5, 0"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
-                            <TextBox x:Name="txtSearch" Width="120" HorizontalAlignment="Right"></TextBox>
-                            <ComboBox Width="120" HorizontalAlignment="Left" x:Name="cbGenres" SelectionChanged="cbGenres_SelectionChanged">
-                            </ComboBox>
-                            <StackPanel Orientation="Horizontal" Margin="3, 10, 0, 0">
-                                <RadioButton Background="Red" ToolTip="Not started" Checked="rb_Checked"></RadioButton>
-                                <RadioButton Background="LightBlue" ToolTip="In progress" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
-                                <RadioButton Background="Green" ToolTip="Finished" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
-                                <RadioButton Background="Yellow" ToolTip="Mastered" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
-                                <RadioButton Background="Black" ToolTip="Abandoned" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="sbStatus" FontSize="16" ></TextBlock>
+                </StatusBarItem>
+        </StatusBar>
+            <StackPanel Orientation="Vertical" Background="Black">
+            <TextBlock x:Name="tbTitle" Text="User's Backlog" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontFamily="Impact" FontSize="32" Foreground="White"/>
+            <TabControl Height="456" x:Name="tcMain" Margin="0, 20, 0, 0"  SelectionChanged="TabControl_SelectionChanged">
+                <TabItem Header="My games" x:Name="tabGames">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Height="429" Width="790">
+                        <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0" Width="790">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <TextBlock Text="Title" Margin="0, 0, 5, 0"></TextBlock>
+                                <TextBlock Text="Genre" Margin="0, 4, 5, 0"></TextBlock>
+                                <TextBlock Text="Status" Margin="0, 12, 5, 0"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <TextBox x:Name="txtSearch" Width="120" HorizontalAlignment="Right"></TextBox>
+                                <ComboBox Width="120" HorizontalAlignment="Left" x:Name="cbGenres" SelectionChanged="cbGenres_SelectionChanged">
+                                </ComboBox>
+                                <StackPanel Orientation="Horizontal" Margin="3, 10, 0, 0" HorizontalAlignment="Left">
+                                    <RadioButton Background="Red" ToolTip="Not started" Checked="rb_Checked"></RadioButton>
+                                    <RadioButton Background="LightBlue" ToolTip="In progress" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
+                                    <RadioButton Background="Green" ToolTip="Finished" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
+                                    <RadioButton Background="Yellow" ToolTip="Mastered" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
+                                    <RadioButton Background="Black" ToolTip="Abandoned" Checked="rb_Checked" Margin="10, 0, 0, 0"></RadioButton>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <Button x:Name="btnSearch" Width="60" Content="Search" Click="btnSearch_Click"></Button>
+                                <Button x:Name="btnShowAll" Content="Show All" Click="btnShowAll_Click"/>
                             </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <Button x:Name="btnSearch" Width="60" Content="Search" Click="btnSearch_Click"></Button>
-                            <Button x:Name="btnShowAll" Content="Show All" Click="btnShowAll_Click"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <DataGrid AutoGenerateColumns="False" Height="370" HorizontalAlignment="Left" 
+                        <DataGrid AutoGenerateColumns="False" Height="345" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True"
                               Margin="0,10,0,0" Name="dataGrid" VerticalAlignment="Top" Width="790" FontSize="18.667" FontFamily="Impact">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Title" Binding="{Binding name}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Achievements" Binding="{Binding achievements}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Status" Binding="{Binding status}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Genre" Binding="{Binding genre}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Comments" Width="*" Binding="{Binding comment}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="My status" x:Name="tabStatus">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Current Status" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontFamily="Impact" FontSize="26.667"></TextBlock>
-                    <StackPanel Orientation="Horizontal" Margin="0, 60, 0, 0" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Not started" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
-                            <TextBlock Text="In progress" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
-                            <TextBlock Text="Finished" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
-                            <TextBlock Text="Mastered" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
-                            <TextBlock Text="Abandoned" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <ProgressBar x:Name="pbNotStarted" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 0, 0, 0" Foreground="#FFE21111" Background="#FF570404">
-                                <ProgressBar.Effect>
-                                    <DropShadowEffect/>
-                                </ProgressBar.Effect>
-                            </ProgressBar>
-                            <ProgressBar x:Name="pbInProgress" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FF2D9DEA" Background="#FF056480">
-                                <ProgressBar.Effect>
-                                    <DropShadowEffect/>
-                                </ProgressBar.Effect>
-                            </ProgressBar>
-                            <ProgressBar x:Name="pbFinished" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF014B01">
-                                <ProgressBar.Effect>
-                                    <DropShadowEffect/>
-                                </ProgressBar.Effect>
-                            </ProgressBar>
-                            <ProgressBar x:Name="pbMastered" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF855C03" Foreground="#FFFFB900">
-                                <ProgressBar.Effect>
-                                    <DropShadowEffect/>
-                                </ProgressBar.Effect>
-                            </ProgressBar>
-                            <ProgressBar x:Name="pbAbandoned" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FF475B4C" Background="Black">
-                                <ProgressBar.Effect>
-                                    <DropShadowEffect/>
-                                </ProgressBar.Effect>
-                            </ProgressBar>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Margin="10, 0, 0, 0" FontSize="16" FontWeight="Bold">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Title" Binding="{Binding name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Achievements" Binding="{Binding achievements}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Status" Binding="{Binding status}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Genre" Binding="{Binding genre}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Comments" Width="*" Binding="{Binding comment}"></DataGridTextColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Delete" Click="cm_Delete"></MenuItem>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="My status" x:Name="tabStatus">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Current Status" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontFamily="Impact" FontSize="26.667"></TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="0, 60, 0, 0" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Not started" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
+                                <TextBlock Text="In progress" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
+                                <TextBlock Text="Finished" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
+                                <TextBlock Text="Mastered" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
+                                <TextBlock Text="Abandoned" Margin="0, 10, 0, 0" Height="20" FontWeight="Bold" FontSize="16" FontFamily="Impact"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <ProgressBar x:Name="pbNotStarted" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 0, 0, 0" Foreground="#FFE21111" Background="#FF570404">
+                                    <ProgressBar.Effect>
+                                        <DropShadowEffect/>
+                                    </ProgressBar.Effect>
+                                </ProgressBar>
+                                <ProgressBar x:Name="pbInProgress" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FF2D9DEA" Background="#FF056480">
+                                    <ProgressBar.Effect>
+                                        <DropShadowEffect/>
+                                    </ProgressBar.Effect>
+                                </ProgressBar>
+                                <ProgressBar x:Name="pbFinished" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF014B01">
+                                    <ProgressBar.Effect>
+                                        <DropShadowEffect/>
+                                    </ProgressBar.Effect>
+                                </ProgressBar>
+                                <ProgressBar x:Name="pbMastered" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Background="#FF855C03" Foreground="#FFFFB900">
+                                    <ProgressBar.Effect>
+                                        <DropShadowEffect/>
+                                    </ProgressBar.Effect>
+                                </ProgressBar>
+                                <ProgressBar x:Name="pbAbandoned" Minimum="0" Maximum="100" Value="0" Width="200" Height="20" Margin="10, 10, 0, 0" Foreground="#FF475B4C" Background="Black">
+                                    <ProgressBar.Effect>
+                                        <DropShadowEffect/>
+                                    </ProgressBar.Effect>
+                                </ProgressBar>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Margin="10, 0, 0, 0" FontSize="16" FontWeight="Bold">
                             <Run Text="{Binding ElementName=pbNotStarted, Path=Value}"></Run>
                             <Run Text="%"></Run>
-                            </TextBlock>
-                            <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
+                                </TextBlock>
+                                <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
                             <Run Text="{Binding ElementName=pbInProgress, Path=Value}"></Run>
                             <Run Text="%"></Run>
-                            </TextBlock>
-                            <TextBlock Margin="10, 10, 0, 0" FontSize="16" FontWeight="Bold">
+                                </TextBlock>
+                                <TextBlock Margin="10, 10, 0, 0" FontSize="16" FontWeight="Bold">
                             <Run Text="{Binding ElementName=pbFinished, Path=Value}"></Run>
                             <Run Text="%"></Run>
-                            </TextBlock>
-                            <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
+                                </TextBlock>
+                                <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
                             <Run Text="{Binding ElementName=pbMastered, Path=Value}"></Run>
                             <Run Text="%"></Run>
-                            </TextBlock>
-                            <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
+                                </TextBlock>
+                                <TextBlock Margin="10, 8, 0, 0" FontSize="16" FontWeight="Bold">
                             <Run Text="{Binding ElementName=pbAbandoned, Path=Value}"></Run>
                             <Run Text="%"></Run>
-                            </TextBlock>
+                                </TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Add new" x:Name="tabAdd"  FocusManager.FocusedElement="{Binding ElementName=txtTitle}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Add Game" HorizontalAlignment="Center" Margin="0, 30, 0, 30" FontFamily="Impact" FontSize="26.667"></TextBlock>
-                        <TextBlock Text="Title" FontFamily="Impact" FontSize="16"></TextBlock>
-                        <TextBox x:Name="txtTitle" Width="180" HorizontalAlignment="Left" FontSize="16"></TextBox>
-                        <TextBlock Text="Achievements" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox x:Name="txtAchievementsGained" Width="40" HorizontalAlignment="Left" FontSize="16"></TextBox>
-                            <TextBlock Text="out of" Margin="5, 0, 5, 0"></TextBlock>
-                            <TextBox x:Name="txtAchievementsTotal" Width="40" HorizontalAlignment="Left" FontSize="16"></TextBox>
+                </TabItem>
+                <TabItem Header="Add new" x:Name="tabAdd"  FocusManager.FocusedElement="{Binding ElementName=txtTitle}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" x:Name="spForm">
+                            <TextBlock Text="Add Game" HorizontalAlignment="Center" Margin="0, 30, 0, 30" FontFamily="Impact" FontSize="26.667"></TextBlock>
+                            <TextBlock Text="Title" FontFamily="Impact" FontSize="16"></TextBlock>
+                            <TextBox x:Name="txtTitle" Width="180" HorizontalAlignment="Left" Text="{Binding name}" FontSize="16"></TextBox>
+                            <TextBlock Text="Achievements" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="txtAchievementsGained" Width="40" HorizontalAlignment="Left" FontSize="16"></TextBox>
+                                <TextBlock Text="out of" Margin="5, 0, 5, 0"></TextBlock>
+                                <TextBox x:Name="txtAchievementsTotal" Width="40" HorizontalAlignment="Left" FontSize="16"></TextBox>
+                            </StackPanel>
+                            <TextBlock Text="Genre" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
+                            <TextBox x:Name="txtGenre" Width="180" HorizontalAlignment="Left" FontSize="16"></TextBox>
+                            <TextBlock Text="Comments" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
+                            <TextBox x:Name="txtComment" Width="180" Height="50" MaxLength="200" FontSize="16" HorizontalAlignment="Left"></TextBox>
+                            <TextBlock Text="Status" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
+                            <StackPanel Orientation="Horizontal" x:Name="spProgress" HorizontalAlignment="Center" Margin="3, 10, 0, 0">
+                                <RadioButton Background="Red" x:Name="rbNotStarted" ToolTip="Not started" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black" IsChecked="True">
+                                    <RadioButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </RadioButton.RenderTransform>
+                                </RadioButton>
+                                <RadioButton Background="LightBlue" x:Name="rbInProgress" ToolTip="In progress" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black">
+                                    <RadioButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </RadioButton.RenderTransform>
+                                </RadioButton>
+                                <RadioButton Background="Green" x:Name="rbFinished" ToolTip="Finished" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="Black" Foreground="White">
+                                    <RadioButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </RadioButton.RenderTransform>
+                                </RadioButton>
+                                <RadioButton Background="Yellow" x:Name="rbMastered" ToolTip="Mastered" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black">
+                                    <RadioButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </RadioButton.RenderTransform>
+                                </RadioButton>
+                                <RadioButton Background="Black" x:Name="rbAbandoned" ToolTip="Abandoned" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="Black" Foreground="White">
+                                    <RadioButton.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </RadioButton.RenderTransform>
+                                </RadioButton>
+                            </StackPanel>
+                            <Button x:Name="btnAdd" Content="Add" Width="120" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Click="btnAdd_Click"></Button>
                         </StackPanel>
-                        <TextBlock Text="Genre" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
-                        <TextBox x:Name="txtGenre" Width="180" HorizontalAlignment="Left" FontSize="16"></TextBox>
-                        <TextBlock Text="Comments" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
-                        <TextBox x:Name="txtComment" Width="180" Height="50" MaxLength="200" FontSize="16" HorizontalAlignment="Left"></TextBox>
-                        <TextBlock Text="Status" FontFamily="Impact" FontSize="16" Margin="0, 10, 0, 0"></TextBlock>
-                        <StackPanel Orientation="Horizontal" x:Name="spProgress" HorizontalAlignment="Center" Margin="3, 10, 0, 0">
-                            <RadioButton Background="Red" x:Name="rbNotStarted" ToolTip="Not started" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black" IsChecked="True">
-                                <RadioButton.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RadioButton.RenderTransform>
-                            </RadioButton>
-                            <RadioButton Background="LightBlue" x:Name="rbInProgress" ToolTip="In progress" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black">
-                                <RadioButton.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RadioButton.RenderTransform>
-                            </RadioButton>
-                            <RadioButton Background="Green" x:Name="rbFinished" ToolTip="Finished" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="Black" Foreground="White">
-                                <RadioButton.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RadioButton.RenderTransform>
-                            </RadioButton>
-                            <RadioButton Background="Yellow" x:Name="rbMastered" ToolTip="Mastered" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" Foreground="White" BorderBrush="Black">
-                                <RadioButton.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RadioButton.RenderTransform>
-                            </RadioButton>
-                            <RadioButton Background="Black" x:Name="rbAbandoned" ToolTip="Abandoned" Margin="10, 0, 10, 0" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="Black" Foreground="White">
-                                <RadioButton.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </RadioButton.RenderTransform>
-                            </RadioButton>
-                        </StackPanel>
-                        <Button x:Name="btnAdd" Content="Add" Width="120" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Click="btnAdd_Click"></Button>
                     </StackPanel>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
-    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </DockPanel>
 </Window>
