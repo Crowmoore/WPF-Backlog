@@ -105,8 +105,28 @@ namespace Backlog
             catch(Exception)
             {
                 throw;
+            }           
+        }
+
+        public static bool UpdateGame(int id, string user, string title, string status, string achievements, string genre, string comment)
+        {
+            try
+            {
+                int updated = Database.UpdateGameInfoToDatabase(id, user, title, status, achievements, genre, comment);
+                if (updated == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             }
-            
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

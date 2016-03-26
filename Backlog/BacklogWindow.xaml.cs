@@ -149,34 +149,80 @@ namespace Backlog
             sbStatus.Text = string.Format("Results filtered by status: '{0}'", status);
         }
 
-        private void Row_DoubleClick(object sender, RoutedEventArgs e)
-        {
-            //Make some kind of editing magic happen here
-
-            /*DataRowView row = dataGrid.SelectedItem as DataRowView;
-            txtTitle.Text = row.Row[1] as string;
-            txtGenre.Text = row.Row[3] as string;
-            tcMain.SelectedIndex = 2;*/
-        }
         private void cm_Delete(object sender, RoutedEventArgs e)
         {
-            DataRowView rowView = dataGrid.SelectedItem as DataRowView;
-            string title = rowView.Row[1] as string;
-            int id = (int)rowView.Row[0];
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + title + " from the database?", "Delete confirmation", MessageBoxButton.YesNo);
-            switch(result.ToString())
+
+            try
             {
-                case "Yes":
-                    BLController.DeleteGame(id);
-                    ListUsersGames(user);
-                    break;
-                case "No":
-                    break;
-                default:
-                    break;
+                DataRowView rowView = dataGrid.SelectedItem as DataRowView;
+                string title = rowView.Row[1] as string;
+                int id = (int)rowView.Row[0];
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + title + " from the database?", "Delete confirmation", MessageBoxButton.YesNo);
+                switch (result.ToString())
+                {
+                    case "Yes":
+                        try
+                        {
+                            BLController.DeleteGame(id);
+                            ListUsersGames(user);
+                            sbStatus.Text = title + " deleted from database";
+                        }
+                        catch (Exception ex)
+                        {
+                            sbStatus.Text = ex.Message;
+                        }
+                        break;
+                    case "No":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                sbStatus.Text = ex.Message;
             }
 
 
+        }
+
+        private void cm_Update(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView rowView = dataGrid.SelectedItem as DataRowView;
+                string title = rowView["Name"].ToString(); ;
+                int id = (int)rowView["idgame"];
+                string status = rowView["Status"].ToString();
+                string genre = rowView["Genre"].ToString();
+                string achievements = rowView["Achievements"].ToString(); ;
+                string comment = rowView["Comment"].ToString(); ;
+                MessageBox.Show(genre);
+                MessageBoxResult result = MessageBox.Show("Confirm data update for " + title, "Update confirmation", MessageBoxButton.YesNo);
+                switch (result.ToString())
+                {
+                    case "Yes":
+                        try
+                        {
+                            BLController.UpdateGame(id, user, title, status, achievements, genre, comment);
+                            ListUsersGames(user);
+                            sbStatus.Text = "Data updated for " + title;
+                        }
+                        catch (Exception ex)
+                        {
+                            sbStatus.Text = ex.Message;
+                        }
+                        break;
+                    case "No":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                sbStatus.Text = ex.Message;
+            }
         }
     }
 }

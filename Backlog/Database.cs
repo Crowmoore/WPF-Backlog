@@ -171,5 +171,38 @@ namespace Backlog
                 }
             }
         }
+
+        public static int UpdateGameInfoToDatabase(int id, string user, string title, string status, string achievements, string genre, string comment)
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string query = "UPDATE game SET name = @TITLE, progress_idprogress = (SELECT idprogress FROM progress WHERE name = @STATUS), " +
+                                "achievements = @ACHIEVEMENTS, comment = @COMMENT, " +
+                                "genre_idgenre = (SELECT idgenre FROM genre WHERE name = @GENRE) WHERE idgame = @ID";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@ID", id);
+                command.Parameters.AddWithValue("@TITLE", title);
+                command.Parameters.AddWithValue("@ACHIEVEMENTS", achievements);
+                command.Parameters.AddWithValue("@STATUS", status);
+                command.Parameters.AddWithValue("@COMMENT", comment);
+                command.Parameters.AddWithValue("@GENRE", genre);
+                int affected = command.ExecuteNonQuery();
+                return affected;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }
