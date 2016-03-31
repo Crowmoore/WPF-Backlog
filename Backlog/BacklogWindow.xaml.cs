@@ -47,12 +47,6 @@ namespace Backlog
             cbGenres.ItemsSource = BLController.GetAllGenres();
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {   
-            view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
-            sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
-        }
-
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
         {
             view.RowFilter = string.Empty;
@@ -197,7 +191,6 @@ namespace Backlog
                 string genre = rowView["Genre"].ToString();
                 string achievements = rowView["Achievements"].ToString(); ;
                 string comment = rowView["Comment"].ToString(); ;
-                MessageBox.Show(genre);
                 MessageBoxResult result = MessageBox.Show("Confirm data update for " + title, "Update confirmation", MessageBoxButton.YesNo);
                 switch (result.ToString())
                 {
@@ -223,6 +216,12 @@ namespace Backlog
             {
                 sbStatus.Text = ex.Message;
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
+            sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
         }
     }
 }

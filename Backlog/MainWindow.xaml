@@ -17,6 +17,7 @@
         <TextBox x:Name="txtEmail" Width="150" FontFamily="Rockwell" FontSize="16" Visibility="Collapsed"></TextBox>
         <Button x:Name="btnLogin" Width="150" Height="30" Content="Login" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnLogin_Click"></Button>
         <Button x:Name="btnRegister" Width="150" Height="30" Content="Register" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnRegister_Click" Visibility="Collapsed"></Button>
+        <Button x:Name="btnBack" Width="150" Height="30" Content="Back" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnBack_Click" Visibility="Collapsed"></Button>
         <Button x:Name="btnSignup" Width="150" Height="30" Content="Sign Up" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnSignup_Click"></Button>
     </StackPanel>
 </Window>

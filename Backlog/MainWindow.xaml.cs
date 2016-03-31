@@ -32,6 +32,11 @@ namespace Backlog
         {
             ShowRegisterScreen();
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            ShowLoginScreen();
+        }
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUsername.Text;
@@ -44,6 +49,7 @@ namespace Backlog
                 if (register.RegisterUser())
                 {
                     ShowLoginScreen();
+                    tbMessage.Text = "Registered successfully. Please login";
                 }
             }
             
@@ -80,12 +86,12 @@ namespace Backlog
             tbEmail.Visibility = Visibility.Visible;
             btnLogin.Visibility = Visibility.Collapsed;
             btnRegister.Visibility = Visibility.Visible;
+            btnBack.Visibility = Visibility.Visible;
             btnSignup.Visibility = Visibility.Collapsed;
         }
         private void ShowLoginScreen()
         {
             tbMessage.Visibility = Visibility.Visible;
-            tbMessage.Text = "Registered successfully. Please login";
             txtEmail.Visibility = Visibility.Collapsed;
             txtPassword.Password = "";
             txtUsername.Text = "";
@@ -93,6 +99,7 @@ namespace Backlog
             tbEmail.Visibility = Visibility.Collapsed;
             btnLogin.Visibility = Visibility.Visible;
             btnRegister.Visibility = Visibility.Collapsed;
+            btnBack.Visibility = Visibility.Collapsed;
             btnSignup.Visibility = Visibility.Visible;
         }
         

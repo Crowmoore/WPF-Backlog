@@ -30,6 +30,51 @@ namespace Backlog
             return table;
         }
 
+        public static bool CheckUsersCredentialsFromDatabase(string user, string password)
+        {
+            int verified = 1;
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string commandText = "SELECT * FROM user WHERE uid = @UID AND password = @PASSWORD";
+                MySqlCommand command = new MySqlCommand(commandText, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@UID", user);
+                command.Parameters.AddWithValue("@PASSWORD", password);
+                command.ExecuteNonQuery();
+                int account = CheckIfUserIsVerified(command);
+                if (account == verified)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Login: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public static int CheckIfUserIsVerified(MySqlCommand command)
+        {
+            int verified = 0;
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                verified = reader.GetInt32("verified");
+            }
+            return verified;
+        }
+
         public static DataTable GetAllUsersGamesFromDatabase(string user)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
