@@ -32,7 +32,28 @@ namespace Backlog
             this.user = user;
             ListUsersGames(user);
             PopulateComboBoxWithGenres();
+            LoadColors();
+            LoadUserSettings();
             tbTitle.Text = user + "'s Backlog";
+        }
+
+        private void LoadUserSettings()
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(Properties.Settings.Default.Color);
+            SolidColorBrush brush = new SolidColorBrush(color);
+
+            tcMain.Background = brush;
+            dataGrid.Background = brush;
+        }
+
+        private void LoadColors()
+        {
+            List<string> colors = new List<string>();
+            foreach(System.Reflection.PropertyInfo info in typeof(Colors).GetProperties())
+            {
+                colors.Add(info.Name);
+            }
+            cbColors.ItemsSource = colors;
         }
 
         private void ListUsersGames(string user)
@@ -222,6 +243,29 @@ namespace Backlog
         {
             view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
             sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
+        }
+
+        private void imgOptions_Click(object sender, MouseButtonEventArgs e)
+        {
+            if(cbColors.Visibility == Visibility.Hidden)
+            {
+                cbColors.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbColors.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void cbColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Properties.Settings.Default.Color = cbColors.SelectedValue.ToString();
+            Color color = (Color)ColorConverter.ConvertFromString(Properties.Settings.Default.Color);
+            SolidColorBrush brush = new SolidColorBrush(color);
+            Properties.Settings.Default.Save();
+
+            tcMain.Background = brush;
+            dataGrid.Background = brush;
         }
     }
 }
