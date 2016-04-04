@@ -77,8 +77,12 @@ namespace Backlog
         {
             try
             {
-                Database.AddGenre(genre);
-                return true;
+                int added = Database.AddGenre(genre);
+                if(added == 1)
+                {
+                    return true;
+                }
+                return false;
             }
             catch(Exception)
             {
@@ -96,11 +100,7 @@ namespace Backlog
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-                
+                return false; 
             }
             catch(Exception)
             {
@@ -117,11 +117,7 @@ namespace Backlog
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-
+                return false;
             }
             catch (Exception)
             {

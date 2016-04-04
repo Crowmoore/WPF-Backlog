@@ -23,6 +23,8 @@ namespace Backlog
     /// </summary>
     public partial class MainWindow : Window
     {
+        Validator validator = new Validator();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +44,6 @@ namespace Backlog
             string username = txtUsername.Text;
             string password = txtPassword.Password;
             string email = txtEmail.Text;
-            Validator validator = new Validator();
             if(validator.Validate(username, password, email))
             {
                 Register register = new Register(username, password, email);
@@ -56,7 +57,7 @@ namespace Backlog
             else
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Username 1-10 characters, no special characters\nPassword 6-20 characters, no special characters\nE-mail needs to be valid";
+                tbMessage.Text = "Something went wrong. Please try again later";
             }
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -69,6 +70,7 @@ namespace Backlog
                 tbMessage.Text = "Logged in";
                 BacklogWindow window = new BacklogWindow(txtUsername.Text);
                 window.Show();
+                this.Close();
             }
             else
             {
@@ -102,7 +104,29 @@ namespace Backlog
             btnBack.Visibility = Visibility.Collapsed;
             btnSignup.Visibility = Visibility.Visible;
         }
-        
 
+        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(validator.CheckUsername(txtUsername.Text))
+            {
+                txtUsername.Foreground = Brushes.Green;
+            }
+            else
+            {
+                txtUsername.Foreground = Brushes.Red;
+            }
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (validator.CheckEmail(txtEmail.Text))
+            {
+                txtEmail.Foreground = Brushes.Green;
+            }
+            else
+            {
+                txtEmail.Foreground = Brushes.Red;
+            }
+        }
     }
 }

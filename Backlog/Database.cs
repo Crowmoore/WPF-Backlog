@@ -139,7 +139,7 @@ namespace Backlog
             }
         }
 
-        public static void AddGenre(string genre)
+        public static int AddGenre(string genre)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -149,7 +149,8 @@ namespace Backlog
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Prepare();
                 command.Parameters.AddWithValue("@GENRE", genre);
-                command.ExecuteNonQuery();
+                int affected = command.ExecuteNonQuery();
+                return affected;
             }
             catch (Exception)
             {

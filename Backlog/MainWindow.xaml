@@ -10,11 +10,11 @@
         <TextBlock Text="Backlog" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontSize="56" FontFamily="Impact"></TextBlock>
         <TextBlock x:Name="tbMessage" Text="" HorizontalAlignment="Center" Margin="0, 50, 0, 0" Visibility="Hidden" Foreground="#FF7E0202"></TextBlock>
         <TextBlock Text="Username" Margin="120, 20, 0, 0"></TextBlock>
-        <TextBox x:Name="txtUsername" Width="150" FontFamily="Rockwell" FontSize="16"></TextBox>
+        <TextBox x:Name="txtUsername" Width="150" FontFamily="Rockwell" FontSize="16" TextChanged="txtUsername_TextChanged"></TextBox>
         <TextBlock Text="Password" Margin="120, 10, 0, 0"></TextBlock>
         <PasswordBox x:Name="txtPassword" Width="150" FontFamily="Rockwell" FontSize="16"></PasswordBox>
         <TextBlock x:Name="tbEmail" Text="E-mail" Margin="120, 10, 0, 0" Visibility="Collapsed"></TextBlock>
-        <TextBox x:Name="txtEmail" Width="150" FontFamily="Rockwell" FontSize="16" Visibility="Collapsed"></TextBox>
+        <TextBox x:Name="txtEmail" Width="150" FontFamily="Rockwell" FontSize="16" Visibility="Collapsed" TextChanged="txtEmail_TextChanged"></TextBox>
         <Button x:Name="btnLogin" Width="150" Height="30" Content="Login" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnLogin_Click"></Button>
         <Button x:Name="btnRegister" Width="150" Height="30" Content="Register" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnRegister_Click" Visibility="Collapsed"></Button>
         <Button x:Name="btnBack" Width="150" Height="30" Content="Back" Margin="0, 20, 0, 0" Cursor="Hand" FontSize="16" FontFamily="Rockwell" Background="#FFFFCDB0" BorderThickness="2" Click="btnBack_Click" Visibility="Collapsed"></Button>

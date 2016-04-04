@@ -42,7 +42,7 @@ namespace Backlog
             try
             {
                 connection.Open();
-                string commandText = "INSERT INTO user (uid, password, email, hash) VALUES (@UID, @PASSWORD, @EMAIL, @HASH)";
+                string commandText = "INSERT INTO user (uid, password, email, hash, verified) VALUES (@UID, @PASSWORD, @EMAIL, @HASH, 1)";
                 MySqlCommand command = new MySqlCommand(commandText, connection);
                 command.Prepare();
                 command.Parameters.AddWithValue("@UID", this.username);
@@ -52,8 +52,8 @@ namespace Backlog
                 int rowCount = command.ExecuteNonQuery();
                 if (rowCount == 1)
                 {
-                    Verification verificate = new Verification();
-                    verificate.SendVerification(this.username, this.email, this.hash);
+                    //Verification verificate = new Verification();
+                    //verificate.SendVerification(this.username, this.email, this.hash);
                     return true;
                 }
                 return false;
