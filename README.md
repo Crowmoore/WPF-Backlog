@@ -8,7 +8,7 @@ This application is designed to help users keep track of their games. It aims to
 
 I, Joel Kortelainen, am a 2nd year software engineering student at Jamk University of Applied Sciences.
 
-## How do you even use the Backlog
+## How do you even use the Backlog?
 
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
 Good! Now comes the hard part; you need to come up with a clever username and also a password but that's not all. You also need
