@@ -75,6 +75,39 @@ namespace Backlog
             return verified;
         }
 
+        public static bool AddUserToDatabase(string uid, string password, string email, string hash)
+        {
+            MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
+            try
+            {
+                connection.Open();
+                string commandText = "INSERT INTO user (uid, password, email, hash, verified) VALUES (@UID, @PASSWORD, @EMAIL, @HASH, 1)";
+                MySqlCommand command = new MySqlCommand(commandText, connection);
+                command.Prepare();
+                command.Parameters.AddWithValue("@UID", uid);
+                command.Parameters.AddWithValue("@PASSWORD", password);
+                command.Parameters.AddWithValue("@EMAIL", email);
+                command.Parameters.AddWithValue("@HASH", hash);
+                int rowCount = command.ExecuteNonQuery();
+                if (rowCount == 1)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (connection != null)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
         public static DataTable GetAllUsersGamesFromDatabase(string user)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
@@ -139,7 +172,7 @@ namespace Backlog
             }
         }
 
-        public static int AddGenre(string genre)
+        public static void AddGenre(string genre)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -149,8 +182,7 @@ namespace Backlog
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Prepare();
                 command.Parameters.AddWithValue("@GENRE", genre);
-                int affected = command.ExecuteNonQuery();
-                return affected;
+                command.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -192,7 +224,7 @@ namespace Backlog
             }
         }
 
-        public static int DeleteGameFromDatabase(int id)
+        public static void DeleteGameFromDatabase(int id)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -202,8 +234,7 @@ namespace Backlog
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Prepare();
                 command.Parameters.AddWithValue("@ID", id);
-                int affected = command.ExecuteNonQuery();
-                return affected;
+                command.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -218,7 +249,7 @@ namespace Backlog
             }
         }
 
-        public static int UpdateGameInfoToDatabase(int id, string user, string title, string status, string achievements, string genre, string comment)
+        public static void UpdateGameInfoToDatabase(int id, string user, string title, string status, string achievements, string genre, string comment)
         {
             MySqlConnection connection = new MySqlConnection(Properties.Settings.Default.Database);
             try
@@ -235,8 +266,7 @@ namespace Backlog
                 command.Parameters.AddWithValue("@STATUS", status);
                 command.Parameters.AddWithValue("@COMMENT", comment);
                 command.Parameters.AddWithValue("@GENRE", genre);
-                int affected = command.ExecuteNonQuery();
-                return affected;
+                command.ExecuteNonQuery();
             }
             catch (Exception)
             {

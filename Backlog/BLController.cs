@@ -24,14 +24,22 @@ namespace Backlog
 
         public static List<string> GetAllGenres()
         {
-            DataTable genres = Database.GetAllGenresFromDatabase();
-            List<string> names = new List<string>();
-            foreach (DataRow row in genres.Rows)
+            try
             {
-                string name = row[0].ToString();
-                names.Add(name);
+                DataTable genres = Database.GetAllGenresFromDatabase();
+                List<string> names = new List<string>();
+                foreach (DataRow row in genres.Rows)
+                {
+                    string name = row[0].ToString();
+                    names.Add(name);
+                }
+                return names;
             }
-            return names;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public static string GetSearchFilter(string search)
@@ -77,12 +85,8 @@ namespace Backlog
         {
             try
             {
-                int added = Database.AddGenre(genre);
-                if(added == 1)
-                {
-                    return true;
-                }
-                return false;
+                Database.AddGenre(genre);
+                return true;
             }
             catch(Exception)
             {
@@ -95,12 +99,8 @@ namespace Backlog
         {
             try
             {
-                int deleted = Database.DeleteGameFromDatabase(id);
-                if(deleted == 1)
-                {
-                    return true;
-                }
-                return false; 
+                Database.DeleteGameFromDatabase(id);
+                return true;
             }
             catch(Exception)
             {
@@ -112,12 +112,9 @@ namespace Backlog
         {
             try
             {
-                int updated = Database.UpdateGameInfoToDatabase(id, user, title, status, achievements, genre, comment);
-                if (updated == 1)
-                {
-                    return true;
-                }
-                return false;
+                Database.UpdateGameInfoToDatabase(id, user, title, status, achievements, genre, comment);
+                return true;
+
             }
             catch (Exception)
             {

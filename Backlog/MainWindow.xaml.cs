@@ -28,6 +28,15 @@ namespace Backlog
         public MainWindow()
         {
             InitializeComponent();
+            LoadUserSettings();
+        }
+
+        private void LoadUserSettings()
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(Properties.Settings.Default.Color);
+            SolidColorBrush brush = new SolidColorBrush(color);
+
+            this.Background = brush;
         }
 
         private void btnSignup_Click(object sender, RoutedEventArgs e)

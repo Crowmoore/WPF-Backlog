@@ -27,7 +27,6 @@ namespace Backlog
             this.password = this.converter.ConvertToPHP(password);
             this.email = email;
             this.hash = GenerateVerificationHash();
-            this.connectionString = Properties.Settings.Default.Database;
         }
         private string GenerateVerificationHash()
         {
@@ -38,37 +37,14 @@ namespace Backlog
 
         public bool RegisterUser()
         {
-            MySqlConnection connection = new MySqlConnection(this.connectionString);
             try
             {
-                connection.Open();
-                string commandText = "INSERT INTO user (uid, password, email, hash, verified) VALUES (@UID, @PASSWORD, @EMAIL, @HASH, 1)";
-                MySqlCommand command = new MySqlCommand(commandText, connection);
-                command.Prepare();
-                command.Parameters.AddWithValue("@UID", this.username);
-                command.Parameters.AddWithValue("@PASSWORD", this.password);
-                command.Parameters.AddWithValue("@EMAIL", this.email);
-                command.Parameters.AddWithValue("@HASH", this.hash);
-                int rowCount = command.ExecuteNonQuery();
-                if (rowCount == 1)
-                {
-                    //Verification verificate = new Verification();
-                    //verificate.SendVerification(this.username, this.email, this.hash);
-                    return true;
-                }
-                return false;
+                Database.AddUserToDatabase(this.username, this.password, this.email, this.hash);
+                return true;
             }
-            catch (Exception ex)
+            catch(Exception)
             {
-                MessageBox.Show("connection: " + ex.Message);
                 return false;
-            }
-            finally
-            {
-                if (connection != null)
-                {
-                    connection.Close();
-                }
             }
         }
 

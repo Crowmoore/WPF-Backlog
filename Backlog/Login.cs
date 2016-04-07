@@ -31,7 +31,7 @@ namespace Backlog
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
         }
     }

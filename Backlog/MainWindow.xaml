@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Backlog"
         mc:Ignorable="d"
-        Title="Backlog Login" Height="500" Width="400" Background="Khaki">
+        Title="Backlog Login" Height="500" Width="400" Background="Khaki"
+        ResizeMode="NoResize" Icon="logo.png">
     <StackPanel Orientation="Vertical" FocusManager.FocusedElement="{Binding ElementName=txtUsername}">
         <TextBlock Text="Backlog" HorizontalAlignment="Center" Margin="0, 30, 0, 0" FontSize="56" FontFamily="Impact"></TextBlock>
         <TextBlock x:Name="tbMessage" Text="" HorizontalAlignment="Center" Margin="0, 50, 0, 0" Visibility="Hidden" Foreground="#FF7E0202"></TextBlock>

@@ -58,14 +58,28 @@ namespace Backlog
 
         private void ListUsersGames(string user)
         {
-            table = BLController.GetAllUsersGames(user);
-            view = table.DefaultView;
-            dataGrid.ItemsSource = view;
+            try
+            {
+                table = BLController.GetAllUsersGames(user);
+                view = table.DefaultView;
+                dataGrid.ItemsSource = view;
+            }
+            catch (Exception ex)
+            {
+                sbStatus.Text = ex.Message;
+            }
         }
 
         private void PopulateComboBoxWithGenres()
         {
-            cbGenres.ItemsSource = BLController.GetAllGenres();
+            try
+            {
+                cbGenres.ItemsSource = BLController.GetAllGenres();
+            }
+            catch (Exception ex)
+            {
+                sbStatus.Text = ex.Message; 
+            }
         }
 
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
@@ -82,11 +96,19 @@ namespace Backlog
             int abandoned = BLController.GetProgress(table, "Abandoned");
             int total = table.Rows.Count;
 
-            pbFinished.Value = BLController.GetPercentage(finished, total);
-            pbInProgress.Value = BLController.GetPercentage(inProgress, total);
-            pbNotStarted.Value = BLController.GetPercentage(notStarted, total);
-            pbMastered.Value = BLController.GetPercentage(mastered, total);
-            pbAbandoned.Value = BLController.GetPercentage(abandoned, total);
+            try
+            {
+                pbFinished.Value = BLController.GetPercentage(finished, total);
+                pbInProgress.Value = BLController.GetPercentage(inProgress, total);
+                pbNotStarted.Value = BLController.GetPercentage(notStarted, total);
+                pbMastered.Value = BLController.GetPercentage(mastered, total);
+                pbAbandoned.Value = BLController.GetPercentage(abandoned, total);
+            }
+            catch(Exception ex)
+            {
+                sbStatus.Text = ex.Message;
+            }
+            
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -172,7 +194,8 @@ namespace Backlog
                 DataRowView rowView = dataGrid.SelectedItem as DataRowView;
                 string title = rowView.Row[1] as string;
                 int id = (int)rowView.Row[0];
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + title + " from the database?", "Delete confirmation", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete " + title + 
+                                          " from the database?", "Delete confirmation", MessageBoxButton.YesNo);
                 switch (result.ToString())
                 {
                     case "Yes":
@@ -206,12 +229,12 @@ namespace Backlog
             try
             {
                 DataRowView rowView = dataGrid.SelectedItem as DataRowView;
-                string title = rowView["Name"].ToString(); ;
+                string title = rowView["Name"].ToString();
                 int id = (int)rowView["idgame"];
                 string status = rowView["Status"].ToString();
                 string genre = rowView["Genre"].ToString();
-                string achievements = rowView["Achievements"].ToString(); ;
-                string comment = rowView["Comment"].ToString(); ;
+                string achievements = rowView["Achievements"].ToString();
+                string comment = rowView["Comment"].ToString();
                 MessageBoxResult result = MessageBox.Show("Confirm data update for " + title, "Update confirmation", MessageBoxButton.YesNo);
                 switch (result.ToString())
                 {
@@ -241,8 +264,15 @@ namespace Backlog
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
-            sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
+            try
+            {
+                view.RowFilter = BLController.GetSearchFilter(txtSearch.Text);
+                sbStatus.Text = string.Format("Results filtered by title: '{0}'", txtSearch.Text);
+            }
+            catch (Exception ex)
+            {
+                sbStatus.Text = ex.Message;
+            }
         }
 
         private void imgOptions_Click(object sender, MouseButtonEventArgs e)
