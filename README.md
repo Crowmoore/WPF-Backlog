@@ -16,6 +16,8 @@ In order to get the Backlog up and running you'll need a Windows machine with .N
 If you have access to Labranet you can find the installation package from \\ghost\TEMP\Installation\H3090.
 Alternatively you can just grab the Release folder from this repository.
 
+There's just one caveat; Since the MySQL database is running on the student server, in order to actually use the application you have to be connected with the Labranet, either directly or via VPN.
+
 ## Features
 
 ### Implemented
