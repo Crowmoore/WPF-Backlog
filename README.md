@@ -39,6 +39,8 @@ Beaty is in the eye of the beholder so I'll let you decide.
 
 ![alt tag](http://i.imgur.com/JoEjCjp.png)
 
+![alt tag](http://i.imgur.com/1YM6LGc.png)
+
 ## How do you even use the Backlog?
 
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
