@@ -49,7 +49,7 @@ The database that the Backlog uses is extremely simple. And simple equals beauti
 
 ![alt tag](http://i.imgur.com/dRsYfE3.png)
 
-## How do you even use the Backlog?
+## But how do I use it?
 
 ### First time launch
 
@@ -73,3 +73,24 @@ I suggest you choose Update at this point. And you guessed it, by selecting Dele
 This is the part you were waiting for. In order to change the main color of the Backlog just click the cog icon found in the upper right corner of the main view. This opens a list of colors for you to choose from.
 
 ![alt tag](http://i.imgur.com/H4Ig8qP.png)
+
+## Time invested in the project
+
+The total time it took to complete this project is around 35-40 hours.
+
+## Analysis
+
+### What I learned during this project
+
+I was somewhat familiar with C# before this project but I had no clue about the .NET framework. And during this project I learned a lot of those .NET shenanigans. Now that I'm older and wiser I would not go the route I took when creating an application like this.
+There's a magical thing called the Entity Framework which would simplify the whole process of database interactions. But by doing things the way I did also taught me that said things can be done the easy way or the hard way. And isn't the hard way the best for learning purposes?
+
+### Greatest challenge during the project
+
+Interestingly enough, the greatest challenge I faced had very little to do with the actual program. Since I'm developing a web based version of the Backlog using PHP, I wanted that both services would work side by side. For example if a user registers to the Backlog using the PHP version, he/she would be able access his/hers games using the desktop version. Makes sense, right?
+I decided to use MD5 hashing algorithm to hash the user's password but alas, to my dismay I noticed that the hashes between those two languages were slightly different. This caused a lot of head scrathing and cursing, but eventually I was able to defeat the beast that was language barrier.
+
+## Review
+
+I'm fairly pleased of how the program ended up. Everything works as it should and during the last tests I was unable to get the program to crash, so that's good. There's a lot of room for improvement on the UI side but since I'm not a graphical designer, meh.
+Overall good stuff and I would rate the program 4/5.
