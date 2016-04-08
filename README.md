@@ -35,9 +35,9 @@ Alternatively you can just grab the Release folder from this repository.
 
 Beaty is in the eye of the beholder so I'll let you decide.
 
-![alt tag](http://imgur.com/t0hkCzq)
+![alt tag](http://i.imgur.com/t0hkCzq.png)
 
-![alt tag](http://imgur.com/JoEjCjp)
+![alt tag](http://i.imgur.com/JoEjCjp.png)
 
 ## How do you even use the Backlog?
 
