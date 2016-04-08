@@ -25,10 +25,19 @@ Alternatively you can just grab the Release folder from this repository.
 - Graphical presentation of your game completion rates.
 - Color theme; you can select your favourite color from a huge variety of choices.
 - Data filtering; you can search your games by title, genre or completion status.
+- Status bar at the bottom to inform you if/when things go horribly wrong.
  
 ## Not implemented
 
 - E-mail verification system when registering a new account.
+
+## What does it look like? Is it pretty?
+
+Beaty is in the eye of the beholder so I'll let you decide.
+
+![alt tag](http://imgur.com/t0hkCzq)
+
+![alt tag](http://imgur.com/JoEjCjp)
 
 ## How do you even use the Backlog?
 
