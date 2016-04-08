@@ -2,11 +2,18 @@
 
 ## What even is this so called Backlog?
 
-This application is designed to help users keep track of their games. It aims to be simple and fast to use with an intuitive user interface. Users will be able to store their games into a MySQL database and get graphical presentation about their game completion rate. This application is written in C# using .NET framework and it is done as a part of Windows-Programming course at JAMK.
+This application is designed to help users keep track of their games. It aims to be simple and fast to use with an intuitive user interface. Users will be able to store their games into a MySQL database and get graphical presentation about their game completion rate. This application is written in C# using .NET framework and it is done as a part of Windows Programming course at JAMK.
 
 ## Who would do such a thing?
 
 I, Joel Kortelainen, am a 2nd year software engineering student at Jamk University of Applied Sciences.
+
+## Installation
+
+In order to get the Backlog up and running you'll need a Windows machine with .Net Framework 4.5.2 or newer.
+
+If you have access to Labranet you can find the installation package from \\ghost\TEMP\Installation\H3090.
+Alternatively you can just grab the Release folder from this repository.
 
 ## How do you even use the Backlog?
 
