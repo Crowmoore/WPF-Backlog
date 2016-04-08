@@ -3,10 +3,11 @@
 ## What even is this so called Backlog?
 
 This application is designed to help users keep track of their games. It aims to be simple and fast to use with an intuitive user interface. Users will be able to store their games into a MySQL database and get graphical presentation about their game completion rate. This application is written in C# using .NET framework and it is done as a part of Windows Programming course at JAMK.
+(Made by a gamer, for gamers)
 
 ## Who would do such a thing?
 
-I, Joel Kortelainen, am a 2nd year software engineering student at Jamk University of Applied Sciences.
+I, Joel Kortelainen, am a 2nd year software engineering student at Jamk University of Applied Sciences. I am a human with two legs and two hands and some other stuff not worth mentioning.
 
 ## Installation
 
