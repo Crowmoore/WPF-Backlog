@@ -61,9 +61,9 @@ your games to the database. How great is that!?
 ### Adding, removing and updating
 
 You can add a new game to the database by navigating to the 'Add game' tab and filling out the form presented before you.
-To update the data of a single game you can write the changes directly to the datagrid and right clicking. This opens up a small
+To update the data of a single game you can write the changes directly to the datagrid and right click. This opens up a small
 menu with two options Update and Delete. It looks like this:
 
-
+![alt tag](http://i.imgur.com/0ey2dZY.png)
 
 I suggest you choose Update at this point. And you guessed it, by selecting Delete the selected game will be permanently deleted from the database. But worry not, there is a confirmation box that prevents any nasty mishaps.
