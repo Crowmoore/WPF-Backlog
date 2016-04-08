@@ -67,3 +67,9 @@ menu with two options Update and Delete. It looks like this:
 ![alt tag](http://i.imgur.com/0ey2dZY.png)
 
 I suggest you choose Update at this point. And you guessed it, by selecting Delete the selected game will be permanently deleted from the database. But worry not, there is a confirmation box that prevents any nasty mishaps.
+
+### Changing the color
+
+This is the part you were waiting for. In order to change the main color of the Backlog just click the cog icon found in the upper right corner of the main view. This opens a list of colors for you to choose from.
+
+![alt tag](http://i.imgur.com/H4Ig8qP.png)
