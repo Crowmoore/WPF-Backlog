@@ -22,11 +22,11 @@ There's just one caveat; Since the MySQL database is running on the student serv
 
 ### Implemented
 
-- Registering system so that you don't "accidentally" mess with other peoples games.
+- Registering system to make you feel special and unique.
 - MySQL database to store your data.
 - Fully implemented CRUD system for data managing.
-- Graphical presentation of your game completion rates.
-- Color theme; you can select your favourite color from a huge variety of choices.
+- Graphical presentation of your game completion rates. (It's really there just to make you feel bad)
+- Color theme; you can select your favourite color (Hot Pink) from a huge variety of choices.
 - Data filtering; you can search your games by title, genre or completion status.
 - Status bar at the bottom to inform you if/when things go horribly wrong.
  
