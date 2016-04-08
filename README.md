@@ -94,4 +94,4 @@ I decided to use MD5 hashing algorithm to hash the user's password but alas, to 
 ## Review
 
 I'm fairly pleased of how the program ended up. Everything works as it should and during the last tests I was unable to get the program to crash, so that's good. There's a lot of room for improvement on the UI side but since I'm not a graphical designer, meh.
-Overall good stuff and I would rate the program 4/5.
+Overall good stuff and I would rate the program 4/5 on an amateur scale.
