@@ -15,6 +15,21 @@ In order to get the Backlog up and running you'll need a Windows machine with .N
 If you have access to Labranet you can find the installation package from \\ghost\TEMP\Installation\H3090.
 Alternatively you can just grab the Release folder from this repository.
 
+## Features
+
+### Implemented
+
+- Registering system so that you don't "accidentally" mess with other peoples games.
+- MySQL database to store your data.
+- Fully implemented CRUD system for data managing.
+- Graphical presentation of your game completion rates.
+- Color theme; you can select your favourite color from a huge variety of choices.
+- Data filtering; you can search your games by title, genre or completion status.
+ 
+## Not implemented
+
+- E-mail verification system when registering a new account.
+
 ## How do you even use the Backlog?
 
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
