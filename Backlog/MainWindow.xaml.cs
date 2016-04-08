@@ -71,22 +71,28 @@ namespace Backlog
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
-            Login login = new Login(txtUsername.Text, txtPassword.Password);
-            if(login.CheckCredentials())
+            try
+            {
+                if(Login.CheckCredentials(txtUsername.Text, txtPassword.Password))
+                {
+                    tbMessage.Visibility = Visibility.Visible;
+                    tbMessage.Text = "Logged in";
+                    BacklogWindow window = new BacklogWindow(txtUsername.Text);
+                    window.Show();
+                    this.Close();
+                }
+                else
+                {
+                    tbMessage.Visibility = Visibility.Visible;
+                    tbMessage.Text = "Wrong username or password";
+                }          
+            }
+            catch (Exception ex)
             {
                 tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Logged in";
-                BacklogWindow window = new BacklogWindow(txtUsername.Text);
-                window.Show();
-                this.Close();
+                tbMessage.Text = ex.Message;
             }
-            else
-            {
-                tbMessage.Visibility = Visibility.Visible;
-                tbMessage.Text = "Wrong username or password";
-            }
-            
+              
         }
         private void ShowRegisterScreen()
         {

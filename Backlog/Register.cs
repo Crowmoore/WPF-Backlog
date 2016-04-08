@@ -14,7 +14,6 @@ namespace Backlog
 {
     class Register
     {
-        private string connectionString;
         private string username;
         private string email;
         private string password;

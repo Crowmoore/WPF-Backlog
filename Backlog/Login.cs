@@ -12,26 +12,21 @@ namespace Backlog
 {
     class Login
     {
-        private string username;
-        private string password;
-        private MD5forPHP converter = new MD5forPHP();
-
-        public Login(string username, string password)
+        public static bool CheckCredentials(string username, string password)
         {
-            this.username = username;
-            this.password = this.converter.ConvertToPHP(password);
-        }
-
-        public bool CheckCredentials()
-        {
+            MD5forPHP converter = new MD5forPHP();
+            string hashedPassword = converter.ConvertToPHP(password);
             try
             {
-                Database.CheckUsersCredentialsFromDatabase(this.username, this.password);
-                return true;
+                if(Database.CheckUsersCredentialsFromDatabase(username, hashedPassword))
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
     }
