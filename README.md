@@ -51,8 +51,19 @@ The database that the Backlog uses is extremely simple. And simple equals beauti
 
 ## How do you even use the Backlog?
 
+### First time launch
+
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
 Good! Now comes the hard part; you need to come up with a clever username and also a password but that's not all. You also need
 to type in your email address. Once that has been taken care of you can log in using your newly created account and start adding
 your games to the database. How great is that!?
 
+### Adding, removing and updating
+
+You can add a new game to the database by navigating to the 'Add game' tab and filling out the form presented before you.
+To update the data of a single game you can write the changes directly to the datagrid and right clicking. This opens up a small
+menu with two options Update and Delete. It looks like this:
+
+
+
+I suggest you choose Update at this point. And you guessed it, by selecting Delete the selected game will be permanently deleted from the database. But worry not, there is a confirmation box that prevents any nasty mishaps.
