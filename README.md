@@ -33,6 +33,8 @@ Alternatively you can just grab the Release folder from this repository.
 
 ## What does it look like? Is it pretty?
 
+### The Backlog
+
 Beaty is in the eye of the beholder so I'll let you decide.
 
 ![alt tag](http://i.imgur.com/t0hkCzq.png)
@@ -40,6 +42,12 @@ Beaty is in the eye of the beholder so I'll let you decide.
 ![alt tag](http://i.imgur.com/JoEjCjp.png)
 
 ![alt tag](http://i.imgur.com/1YM6LGc.png)
+
+### The database
+
+The database that the Backlog uses is extremely simple. And simple equals beautifull. Right?
+
+![alt tag](http://i.imgur.com/dRsYfE3.png)
 
 ## How do you even use the Backlog?
 
