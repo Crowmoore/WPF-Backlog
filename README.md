@@ -33,6 +33,7 @@ There's just one caveat; Since the MySQL database is running on the student serv
 ## Not implemented
 
 - E-mail verification system when registering a new account.
+- Showing the cover art for the games.
 
 ## What does it look like? Is it pretty?
 
@@ -80,6 +81,10 @@ This is the part you were waiting for. In order to change the main color of the 
 ## Time invested in the project
 
 The total time it took to complete this project is around 35-40 hours.
+
+## Future development
+
+It's clear that there is a lot of room for improvement, for example more professional looking UI and better database management. But I would say that adding those features in this program would be a moot effort. I would prefec to start the project from scratch using the entity framework and looking up some similar software for UI ideas. As for now, I won't be developing the Backlog any further.
 
 ## Analysis
 
