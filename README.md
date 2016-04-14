@@ -88,7 +88,7 @@ This is the part you were waiting for. In order to change the main color of the 
 
 ## Time invested in the project
 
-The total time it took to complete this project is around 35-40 hours.
+The total time it took to complete this project is around 35-40 hours. Not including the database creation.
 
 ## Future development
 
