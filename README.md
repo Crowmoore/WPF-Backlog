@@ -59,7 +59,15 @@ The database that the Backlog uses is extremely simple. And simple equals beauti
 
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
 Good! Now comes the hard part; you need to come up with a clever username and also a password but that's not all. You also need
-to type in your email address. Once that has been taken care of you can log in using your newly created account and start adding
+to type in your email address. If the username or email address is invalid, the text turns red, as seen below.
+
+![alt tag]()
+
+If everything is a-okay, the text turns green. Easy!
+
+![alt tag]()
+
+Once that has been taken care of you can log in using your newly created account and start adding
 your games to the database. How great is that!?
 
 ### Adding, removing and updating
