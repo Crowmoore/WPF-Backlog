@@ -61,11 +61,11 @@ Using the application is as simple as riding a tricycle. Start the application a
 Good! Now comes the hard part; you need to come up with a clever username and also a password but that's not all. You also need
 to type in your email address. If the username or email address is invalid, the text turns red, as seen below.
 
-![alt tag]()
+![alt tag](http://i.imgur.com/iF4fsu6.png)
 
 If everything is a-okay, the text turns green. Easy!
 
-![alt tag]()
+![alt tag](http://i.imgur.com/LkWiSQx.png)
 
 Once that has been taken care of you can log in using your newly created account and start adding
 your games to the database. How great is that!?
