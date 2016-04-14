@@ -18,6 +18,10 @@ Alternatively you can just grab the Release folder from this repository.
 
 There's just one caveat; Since the MySQL database is running on the student server, in order to actually use the application you have to be connected with the Labranet, either directly or via VPN.
 
+### Note
+
+The config and settings files are not included in the source files since they contain some sensitive information about the database.
+
 ## Features
 
 ### Implemented
