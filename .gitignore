@@ -242,10 +242,6 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-Backlog/App.config
-Backlog/Properties/
-db.txt
-
 # JetBrains Rider
 .idea/
 *.sln.iml
