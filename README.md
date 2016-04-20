@@ -13,24 +13,31 @@ I, Joel Kortelainen, am a 2nd year software engineering student at Jamk Universi
 
 In order to get the Backlog up and running you'll need a Windows machine with .Net Framework 4.5.2 or newer.
 
-If you have access to Labranet you can find the installation package from \\ghost\TEMP\Installation\H3090.
+If you have access to Labranet you can find the installation package from \\\ghost\TEMP\Installation\H3090.
 Alternatively you can just grab the Release folder from this repository.
+
+There's just one caveat; Since the MySQL database is running on the student server, in order to actually use the application you have to be connected with the Labranet, either directly or via VPN.
+
+### Note
+
+The config and settings files are not included in the source files since they contain some sensitive information about the database.
 
 ## Features
 
 ### Implemented
 
-- Registering system so that you don't "accidentally" mess with other peoples games.
+- Registering system to make you feel special and unique.
 - MySQL database to store your data.
 - Fully implemented CRUD system for data managing.
-- Graphical presentation of your game completion rates.
-- Color theme; you can select your favourite color from a huge variety of choices.
+- Graphical presentation of your game completion rates. (It's really there just to make you feel bad)
+- Color theme; you can select your favourite color (Hot Pink) from a huge variety of choices.
 - Data filtering; you can search your games by title, genre or completion status.
 - Status bar at the bottom to inform you if/when things go horribly wrong.
  
 ## Not implemented
 
 - E-mail verification system when registering a new account.
+- Showing the cover art for the games.
 
 ## What does it look like? Is it pretty?
 
@@ -56,7 +63,15 @@ The database that the Backlog uses is extremely simple. And simple equals beauti
 
 Using the application is as simple as riding a tricycle. Start the application and click the button labeled 'Register'. Still with me?
 Good! Now comes the hard part; you need to come up with a clever username and also a password but that's not all. You also need
-to type in your email address. Once that has been taken care of you can log in using your newly created account and start adding
+to type in your email address. If the username or email address is invalid, the text turns red, as seen below.
+
+![alt tag](http://i.imgur.com/iF4fsu6.png)
+
+If everything is a-okay, the text turns green. Easy!
+
+![alt tag](http://i.imgur.com/LkWiSQx.png)
+
+Once that has been taken care of you can log in using your newly created account and start adding
 your games to the database. How great is that!?
 
 ### Adding, removing and updating
@@ -77,7 +92,11 @@ This is the part you were waiting for. In order to change the main color of the 
 
 ## Time invested in the project
 
-The total time it took to complete this project is around 35-40 hours.
+The total time it took to complete this project is around 35-40 hours. Not including the database creation.
+
+## Future development
+
+It's clear that there is a lot of room for improvement, for example more professional looking UI and better database management. But I would say that adding those features in this program would be a moot effort. I would prefec to start the project from scratch using the entity framework and looking up some similar software for UI ideas. As for now, I won't be developing the Backlog any further.
 
 ## Analysis
 
